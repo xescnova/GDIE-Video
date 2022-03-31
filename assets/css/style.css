@@ -938,9 +938,20 @@ section {
 .portfolio-details {
   padding-top: 40px;
 }
-.portfolio-details .portfolio-details-slider img {
+.portfolio-details .portfolio-details-slider video {
   width: 100%;
+  border: 2px solid black;
 }
+.portfolio-details .portfolio-details-slider img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+    width: 55px;
+    height: 55px;
+    filter: invert(55%) sepia(100%) saturate(3.5);
+    overflow: hidden;
+} 
 .portfolio-details .portfolio-details-slider .swiper-pagination {
   margin-top: 20px;
   position: relative;
@@ -985,6 +996,7 @@ section {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+
 
 /*--------------------------------------------------------------
 # Team

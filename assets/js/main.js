@@ -6,7 +6,6 @@
 */
 (function() {
   "use strict";
-
   /**
    * Easy selector helper function
    */
@@ -253,5 +252,19 @@
       mirror: false
     })
   });
+
+  /**
+   * Video Mr. Robot
+   */
+
+   const video = document.getElementById('videoMrRobot');
+   const videoControls = video.controls;
+ 
+   const videoWorks = !!document.createElement('video').canPlayType;
+   if (videoWorks) {
+     video.controls = true;
+     video.muted = true;
+     videoControls.classList.remove('hidden');
+   }
 
 })()
