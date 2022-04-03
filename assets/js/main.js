@@ -19,11 +19,29 @@ video.addEventListener('timeupdate', updateProgress);
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     //video.controls = true;
-    video.muted = true;
+    video.muted = false;
 
 }
 
 function updateProgress() {
     var barpos = video.currentTime / video.duration;
     bar.style.width = barpos * 100 + "%";
+}
+
+
+
+
+//Play y pause del vídeo
+function botonPlay() {
+    var bPrueba = document.getElementById("botonPlay");
+    b = document.getElementById("imgBoton")
+    bPrueba.onclick = function() {
+        if (video.paused) {
+            video.play();
+            b.src = "assets/img/pause.png"
+        } else {
+            video.pause();
+            b.src = "assets/img/play.png"
+        }
+    }
 }
