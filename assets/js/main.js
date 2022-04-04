@@ -20,7 +20,6 @@ const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     //video.controls = true;
     video.muted = false;
-
 }
 
 function updateProgress() {
@@ -33,15 +32,30 @@ function updateProgress() {
 
 //Play y pause del vídeo
 function botonPlay() {
-    var bPrueba = document.getElementById("botonPlay");
-    b = document.getElementById("imgBoton")
-    bPrueba.onclick = function() {
+    var botonpl = document.getElementById("botonPlay");
+    imgplay = document.getElementById("imgBoton")
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
-            b.src = "assets/img/pause.png"
+            imgplay.src = "assets/img/pause.png"
         } else {
             video.pause();
-            b.src = "assets/img/play.png"
+            imgplay.src = "assets/img/play.png"
+        }
+    }
+}
+
+//Mute y unmute del vídeo
+function botonMuted() {
+    var botonmt = document.getElementById("botonMute");
+    imgmute = document.getElementById("imgMute")
+    botonmt.onclick = function() {
+        if (video.muted) {
+            video.muted = false;
+            imgmute.src = "assets/img/soundon.png"
+        } else {
+            video.muted = true;
+            imgmute.src = "assets/img/soundoff.png"
         }
     }
 }
