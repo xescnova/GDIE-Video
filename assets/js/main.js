@@ -18,6 +18,8 @@ const imgmute = document.getElementById("imgMute");
 var volumeValue = document.getElementById('valueVol');
 var tracks = video.textTracks;
 var escenas = tracks[0];
+var personajes = tracks[1];
+personajes.mode = "showing";
 escenas.mode = "hidden";
 
 video.addEventListener('timeupdate', updateProgress);
@@ -26,7 +28,7 @@ volume.addEventListener('mousemove', volumebar);
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     volumebar()
-    //video.controls = true;
+        //video.controls = true;
     video.muted = false;
 
 }
@@ -84,10 +86,10 @@ function botonSubt() {
 
 function volumebar() {
     var actualval = volume.value;
-    var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + actualval +'%, rgb(214,214,214)'+ actualval +'%)';
+    var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + actualval + '%, rgb(214,214,214)' + actualval + '%)';
     volume.style.background = color;
     if (!video.muted) {
-        video.volume = volume.value/100;
+        video.volume = volume.value / 100;
     }
 }
 
@@ -101,11 +103,18 @@ function minusTen() {
 
 
 function openFullscreen() {
-  if (video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if (video.webkitRequestFullscreen) { /* Safari */
-  video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) { /* IE11 */
-  video.msRequestFullscreen();
-  }
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) { /* Safari */
+        video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { /* IE11 */
+        video.msRequestFullscreen();
+    }
+}
+
+
+
+personajes.oncuechange = event => {
+    let cues = personajes.activeCues; // array of current cues
+    //console.log(cues[0].text);
 }
