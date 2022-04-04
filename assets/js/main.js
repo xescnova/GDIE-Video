@@ -116,5 +116,13 @@ function openFullscreen() {
 
 personajes.oncuechange = event => {
     let cues = personajes.activeCues; // array of current cues
-    //console.log(cues[0].text);
+    var arrayPersonajes = JSON.parse(cues[0].text);
+    var personajesDiv = document.getElementById("personajesCaja");
+    personajesDiv.innerHTML = '';
+    for (let index = 0; index < arrayPersonajes.length; index++) {
+        var personajesDiv = document.getElementById("personajesCaja");
+        var div = document.createElement('elemento');
+        div.innerHTML = '<div class="col-sm-1"><img src="assets/' + arrayPersonajes[index].Imagen + '" class="img-fluid" alt="" height="300px" width="200px"></div><div class="col-sm-2"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div></div>';
+        personajesDiv.appendChild(div);
+    }
 }

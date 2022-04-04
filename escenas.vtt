@@ -2,8 +2,7 @@ WEBVTT
 
 NOTE 1 ESCENA TREN
 00:00:01.230 --> 00:00:47.500
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -14,28 +13,26 @@ NOTE 1 ESCENA TREN
         "Nombre": "Christian Slater",
         "Personaje": "Mr. Robot",
         "URL":"https://es.wikipedia.org/wiki/Christian_Slater",
-        "Imagen":"img/Rami_Malek.jpg"
+        "Imagen":"img/Christian_Slater.jpg"
          }
-    ]
-}
+]
+
 
 NOTE 2 ESCENA CALLE
 00:00:47.500 --> 00:00:58.200
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
         "URL":"https://es.wikipedia.org/wiki/Rami_Malek",
         "Imagen":"img/Rami_Malek.jpg"
          }
-    ]
-}
+]
+
 
 NOTE 3 ESCENA ENTRADA OFICINA
 00:00:58.200 --> 00:01:26.530
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -48,13 +45,12 @@ NOTE 3 ESCENA ENTRADA OFICINA
         "URL":"https://en.wikipedia.org/wiki/Aaron_Takahashi",
         "Imagen":"img/Aaron_Takahashi.jpg"
          }
-    ]
-}
+]
+
 
 NOTE 4 ESCENA CONVERSACION OFICINA
 00:01:26.530 --> 00:02:18.020
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -62,7 +58,7 @@ NOTE 4 ESCENA CONVERSACION OFICINA
         "Imagen":"img/Rami_Malek.jpg"
          },
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
@@ -73,13 +69,12 @@ NOTE 4 ESCENA CONVERSACION OFICINA
         "URL":"https://es.wikipedia.org/wiki/Michel_Gill",
         "Imagen":"img/Michel_Gill.jpg"
          }
-    ]
-}
+]
+
 
 NOTE 5 ESCENA CONVERSACION 2 OFICINA
 00:02:18.020 --> 00:02:34.050
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -87,18 +82,17 @@ NOTE 5 ESCENA CONVERSACION 2 OFICINA
         "Imagen":"img/Rami_Malek.jpg"
          },
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
         }
-    ]
-}
+]
+
 
 NOTE 6 ESCENA BAR
 00:02:34.050 --> 00:02:47.300
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -106,18 +100,17 @@ NOTE 6 ESCENA BAR
         "Imagen":"img/Rami_Malek.jpg"
          },
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
         }
-    ]
-}
+]
+
 
 NOTE 6 ESCENA CONVERSACION 3 OFICINA
 00:02:47.300 --> 00:03:29.430
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -125,18 +118,17 @@ NOTE 6 ESCENA CONVERSACION 3 OFICINA
         "Imagen":"img/Rami_Malek.jpg"
          },
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
         }
-    ]
-}
+]
+
 
 NOTE 7 ESCENA CONVERSACION 4 OFICINA
 00:03:29.430 --> 00:03:37.430
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -144,7 +136,7 @@ NOTE 7 ESCENA CONVERSACION 4 OFICINA
         "Imagen":"img/Rami_Malek.jpg"
          },
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
@@ -155,15 +147,13 @@ NOTE 7 ESCENA CONVERSACION 4 OFICINA
         "URL":"https://es.wikipedia.org/wiki/Ben_Rappaport",
         "Imagen":"img/Ben_Rappaport.jpg"
         }
-    ]
-}
+]
 
 NOTE 8 ESCENA CONVERSACION 5 OFICINA
 00:03:37.430 --> 00:04:05.430
-{
-    "actores":[
+[
         {
-        "Nombre": "Pourtia Doubleday",
+        "Nombre": "Portia Doubleday",
         "Personaje": "Angela Moss",
         "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
         "Imagen":"img/Portia_Doubleday.jpg"
@@ -174,26 +164,23 @@ NOTE 8 ESCENA CONVERSACION 5 OFICINA
         "URL":"https://es.wikipedia.org/wiki/Ben_Rappaport",
         "Imagen":"img/Ben_Rappaport.jpg"
         }
-    ]
-}
+]
+
 
 NOTE 9 ESCENA CALLE
 00:04:05.430 --> 00:04:11.330
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
         "URL":"https://es.wikipedia.org/wiki/Rami_Malek",
         "Imagen":"img/Rami_Malek.jpg"
          }
-    ]
-}
+]
 
 NOTE 10 ESCENA PSICOLOGO
 00:04:11.330 --> 00:04:26.530
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -206,13 +193,12 @@ NOTE 10 ESCENA PSICOLOGO
         "URL":"https://es.wikipedia.org/wiki/Gloria_Reuben",
         "Imagen":"img/Gloria_Reuben.jpg"
         }
-    ]
-}
+]
+
 
 NOTE 10 ESCENA PSICOLOGO
 04:26:37.180 --> 04:31:59.580
-{
-    "actores":[
+[
         {
         "Nombre": "Rami Malek",
         "Personaje": "Elliot Alderson",
@@ -225,6 +211,6 @@ NOTE 10 ESCENA PSICOLOGO
         "URL":"https://es.wikipedia.org/wiki/Gloria_Reuben",
         "Imagen":"img/Gloria_Reuben.jpg"
         }
-    ]
-}
+]
+
 
