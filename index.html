@@ -124,16 +124,23 @@
                                 <div class="bar-back">
                                     <div class="bar-progress" id="progressBar"></div>
                                 </div>
+                                <!-- Boton Play -->
                                 <div class="playbutton">
                                     <button id="botonPlay" onclick="botonPlay()" type="button"><img id="imgBoton" src="assets/img/play.png" width="18px"></button>
                                 </div>
+                                <!-- Separador -->
                                 <div class="separator"></div>
+                                <!-- Boton Mute -->
                                 <div class="playbutton">
                                     <button id="botonMute" onclick="botonMuted()" type="button"><img id="imgMute" src="assets/img/soundon.png" width="23px"></button>
-                                    <button id="botonPlay" onclick="botonPlay()" type="button"><img id="imgBoton"
-                                            src="assets/img/play.png" width="20px"></button>
-                                    <button id="botonSubt" onclick="botonSubt()" type="button"><img id="imgBoton"
-                                            src="assets/img/subtitulos.png" width="20px"></button>
+                                </div>
+                                <!-- Barra Volume -->
+                                <div class="slideVolume">
+                                    <input type="range" min="1" max="100" value="1" id="myrange" class="slider">
+                                </div>
+                                <!-- Boton Subtitles -->
+                                <div class="subtitles">
+                                    <button id="botonSubt" onclick="botonSubt()" type="button"><img id="imgSub" src="assets/img/subtitulos.png" width="20px"></button>
                                 </div>
                             </div>
                         </div>

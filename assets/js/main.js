@@ -67,9 +67,9 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     bS.onclick = function() {
-        var e = escenas.mode;
+        var esc = escenas.mode;
         console.log(e);
-        if (e == "hidden") {
+        if (esc == "hidden") {
             escenas.mode = "showing";
         } else {
             escenas.mode = "hidden";
