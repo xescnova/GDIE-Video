@@ -73,13 +73,16 @@ function botonMuted() {
 
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
+    imgsub = document.getElementById("imgSub")
     bS.onclick = function() {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
             escenas.mode = "showing";
+            imgsub.src = "assets/img/CC_ON.png"
         } else {
             escenas.mode = "hidden";
+            imgsub.src = "assets/img/CC_OFF.png"
         }
     }
 }

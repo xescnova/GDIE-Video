@@ -49,11 +49,7 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
                     <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
                     <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
                     <li class="dropdown"><a href="#"><span>Drop Down</span>
                             <i class="bi bi-chevron-down"></i></a>
@@ -76,8 +72,8 @@
                         </ul>
                     </li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="getstarted scrollto" href="#about">Get
-                            Started</a></li>
+                    <!-- <li><a class="getstarted scrollto" href="#about">Get
+                            Started</a></li> -->
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -138,12 +134,13 @@
                                 <div class="slideVolume">
                                     <input type="range" id="volbar" class="sliderBar" min="0" max="100" value="10">
                                 </div>
-                                <div class="playbutton">
+                                <!-- Avazar, Retroceder y Subtitulos -->
+                                <div class="controles">
                                     <button id="minusten" onclick="minusTen()" type="button"><img id="imgMinusten" src="assets/img/menos10.png" width="23px"></button>
                                     <button id="plusten" onclick="plusTen()" type="button"><img id="imgPlusten" src="assets/img/mas10.png" width="23px"></button>
-                                    <button id="botonSubt" onclick="botonSubt()" type="button"><img id="imgSub" src="assets/img/subtitulos.png" width="20px"></button>
+                                    <button id="botonSubt" onclick="botonSubt()" type="button"><img id="imgSub" src="assets/img/CC_OFF.png" width="23px" height="25px"></button>
                                 </div>
-                                <!-- Boton Subtitles -->
+                                <!-- Boton Pantalla Completa -->
                                 <div class="subtitles">
                                     <button id="fullscreen" onclick="openFullscreen()" type="button"><img id="imgFscreen" src="assets/img/fullscreen.png" width="20px"></button>
                                 </div>
@@ -197,28 +194,13 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer ">
-        <div class="container ">
-            <div class="row d-flex align-items-center ">
-                <div class="col-lg-6 text-lg-left text-center ">
-                    <div class="copyright ">
-                        &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
-                    </div>
-                    <div class="credits ">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/ ">BootstrapMade</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 ">
-                    <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0 ">
-                        <a href="#intro " class="scrollto ">Home</a>
-                        <a href="#about " class="scrollto ">About</a>
-                        <a href="# ">Privacy Policy</a>
-                        <a href="# ">Terms of Use</a>
-                    </nav>
+    <footer id="footer" class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-start">Copyright &copy; Sancionados 2022</div>
+                <div class="col-lg-6 text-lg-end">
+                    <a class="link-dark text-decoration-none me-3" href="https://www.privacypolicies.com/generic/">Políticas de privacidad</a>
+                    <a class="link-dark text-decoration-none" href="https://www.privacypolicies.com/blog/sample-terms-use-template/">Términos de uso</a>
                 </div>
             </div>
         </div>
