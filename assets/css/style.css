@@ -173,7 +173,7 @@ h6 {
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-    background: #3498db;
+    background: #6edb34;
     padding: 8px 25px;
     margin-left: 30px;
     border-radius: 50px;
@@ -1248,23 +1248,30 @@ section {
 /* Boton play */
 .playbutton {
     padding: 6px;
-    filter: white;
+    filter:#FFFFFF;
     outline: 0;
     cursor: pointer;
 }
 
 .separator {
-    height: 40px;
+    height: 45px;
     width: 2px;
     background-color: #5f5f5f;
 }
+
+.controles {
+    padding: 6px;
+    outline: 0;
+    filter: white;
+    cursor: pointer;
+}
 /* Fin - Boton play */
 
-.playbutton svg:before {
+/* .playbutton svg:before {
     filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
     outline: 0;
     cursor: pointer;
-}
+} */
 
 .video-progress {
     position: relative;
