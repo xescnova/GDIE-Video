@@ -73,7 +73,7 @@ function botonSubt() {
     var bS = document.getElementById("botonSubt");
     bS.onclick = function() {
         var esc = escenas.mode;
-        console.log(e);
+        console.log(esc);
         if (esc == "hidden") {
             escenas.mode = "showing";
         } else {
