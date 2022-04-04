@@ -28,7 +28,7 @@ volume.addEventListener('mousemove', volumebar);
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     volumebar()
-        //video.controls = true;
+    //video.controls = true;
     video.muted = false;
 
 }
@@ -45,7 +45,7 @@ function updateProgress() {
 function botonPlay() {
     var botonpl = document.getElementById("botonPlay");
     imgplay = document.getElementById("imgBoton")
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -59,7 +59,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -74,7 +74,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
+    bS.onclick = function () {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -124,8 +124,9 @@ personajes.oncuechange = event => {
     personajesDiv.innerHTML = '';
     for (let index = 0; index < arrayPersonajes.length; index++) {
         var personajesDiv = document.getElementById("personajesCaja");
-        var div = document.createElement('elemento');
-        div.innerHTML = '<div class="col-sm-1"><img src="assets/' + arrayPersonajes[index].Imagen + '" class="img-fluid" alt="" height="300px" width="200px"></div><div class="col-sm-2"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div></div>';
-        personajesDiv.appendChild(div);
+        var div = document.createElement('div');
+        div.setAttribute("class", "col-sm-2");
+        div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
+        personajesDiv.appendChild(div.cloneNode(true));
     }
 }
