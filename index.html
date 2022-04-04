@@ -42,7 +42,7 @@
                 justify-content-between">
 
             <div class="logo">
-                <h1><a href="index.html">Vesperr</a></h1>
+                <h1><a href="index.html">Sancionados</a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
@@ -95,7 +95,7 @@
 
                 <div class="d-flex justify-content-between
                         align-items-center">
-                    <h2>Portfolio Details</h2>
+                    <h2>Mr. Robot</h2>
                     <ol>
                         <li><a href="index.html">Home</a></li>
                         <li>Portfolio Details</li>
@@ -136,15 +136,19 @@
                                 </div>
                                 <!-- Barra Volume -->
                                 <div class="slideVolume">
-                                    <input type="range" min="1" max="100" value="1" id="myrange" class="slider">
+                                    <input type="range" id="volbar" class="sliderBar" min="0" max="100" value="10">
+                                </div>
+                                <div class="playbutton">
+                                    <button id="minusten" onclick="minusTen()" type="button"><img id="imgMinusten" src="assets/img/menos10.png" width="23px"></button>
+                                    <button id="plusten" onclick="plusTen()" type="button"><img id="imgPlusten" src="assets/img/mas10.png" width="23px"></button>
                                 </div>
                                 <!-- Boton Subtitles -->
                                 <div class="subtitles">
+                                    <button id="fullscreen" onclick="openFullscreen()" type="button"><img id="imgFscreen" src="assets/img/fullscreen.png" width="20px"></button>
                                     <button id="botonSubt" onclick="botonSubt()" type="button"><img id="imgSub" src="assets/img/subtitulos.png" width="20px"></button>
                                 </div>
                             </div>
                         </div>
-                        <!--<img src="assets/img/playbtn.png">-->
                     </div>
 
                     <div class="col-lg-4">
