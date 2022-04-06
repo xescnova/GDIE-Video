@@ -118,15 +118,17 @@ function openFullscreen() {
 
 
 personajes.oncuechange = event => {
-    let cues = personajes.activeCues; // array of current cues
-    var arrayPersonajes = JSON.parse(cues[0].text);
-    var personajesDiv = document.getElementById("personajesCaja");
-    personajesDiv.innerHTML = '';
-    for (let index = 0; index < arrayPersonajes.length; index++) {
+    if (document.body.contains(document.getElementById('personajesCaja'))) {
+        let cues = personajes.activeCues; // array of current cues
+        var arrayPersonajes = JSON.parse(cues[0].text);
         var personajesDiv = document.getElementById("personajesCaja");
-        var div = document.createElement('div');
-        div.setAttribute("class", "col-sm-2");
-        div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
-        personajesDiv.appendChild(div.cloneNode(true));
+        personajesDiv.innerHTML = '';
+        for (let index = 0; index < arrayPersonajes.length; index++) {
+            var personajesDiv = document.getElementById("personajesCaja");
+            var div = document.createElement('div');
+            div.setAttribute("class", "col-sm-2");
+            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
+            personajesDiv.appendChild(div.cloneNode(true));
+        }
     }
 }

@@ -152,27 +152,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="portfolio-info" style="margin-top:10px">
+                            <h3>Upload video</h3>
+                            <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+                                <h4> Enviar mi archivo:</h4>
+                                <input name="subir_archivo" type="file" />
+                                <div class="uploadbtn"><input type="submit" value="Upload" /></div>
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="portfolio-info">
-                                <h3>Upload video</h3>
-                                <br>
-                                <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
-                                    <h4> Enviar mi archivo:</h4> 
-                                    <br>
-                                    <input name="subir_archivo" type="file" />
-                                    <br>
-                                    <br>
-                                    <div class="uploadbtn"><input type="submit" value="Upload" /></div>
-                                    <br>
-                                    <br>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row">
+                    <div class="col-lg-5">
+                        
+                        <div class="row gy-4">
                             <div class="portfolio-info">
                             <h3> Edit video (metadata):</h3> 
                                 <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
@@ -203,24 +196,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="portfolio-description">
-                            <h2>This is an example of portfolio detail</h2>
-                            <p>
-                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur
-                                dignissimos. Sequi nulla at esse enim cum deserunt eius.
-                            </p>
-                        </div>
                     </div>
-
                 </div>
-
-                <div class="card" id="xray">
-                    <div class="row no-gutters" id="personajesCaja">
-
-                    </div>
-
-                </div>
-
             </div>
         </section>
         <!-- End Portfolio Details Section -->
