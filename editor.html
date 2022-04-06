@@ -107,7 +107,7 @@
             <div class="container">
 
                 <div class="row gy-4">
-                    <div class="col-lg-8">
+                    <div class="col-lg-5">
                         <div class="c-video">
                             <video class="video" id="videoMrRobot" playsinline poster="assets/img/MrRobot.png">
                                 <source src="https://alumnes-ltim.uib.es/gdie2206/video/videoGDIE.mkv">
@@ -152,37 +152,52 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="portfolio-info">
-                            <h3>Enviar archivo</h3>
-                            <br>
+                        <div class="portfolio-info" style="margin-top:10px">
+                            <h3>Upload video</h3>
                             <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
-                                <p> Enviar mi archivo: <input name="subir_archivo" type="file" /></p>
-                                <p> <input type="submit" value="Enviar Archivo" /></p>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+                                <h4> Enviar mi archivo:</h4>
+                                <input name="subir_archivo" type="file" />
+                                <div class="uploadbtn"><input type="submit" value="Upload" /></div>
                             </form>
-
-                        </div>
-                        <div class="portfolio-description">
-                            <h2>This is an example of portfolio detail</h2>
-                            <p>
-                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur
-                                dignissimos. Sequi nulla at esse enim cum deserunt eius.
-                            </p>
                         </div>
                     </div>
 
-                </div>
+                    <div class="col-lg-5">
 
-                <div class="card" id="xray">
-                    <div class="row no-gutters" id="personajesCaja">
-
+                        <div class="row gy-4">
+                            <div class="portfolio-info">
+                                <h3> Edit video (metadata):</h3>
+                                <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+                                    <h4> Time:</h4>
+                                    <div class="uploadbtn">
+                                        <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background: #fa2314;padding: 6px 12px;text-decoration: none;font-size: 16px;margin: 4px 2px;cursor: pointer;">Start</button>
+                                        <input type="text" id="startTime" placeholder="Start" name="fname">
+                                        <input type="text" id="endTime" placeholder="End" name="fname">
+                                    </div>
+                                    <br>
+                                    <h4> Actor:</h4>
+                                    <div class="uploadbtn">
+                                        <input type="text" id="actorName" placeholder="Rami Malek" name="fname">
+                                    </div>
+                                    <br>
+                                    <h4> Character:</h4>
+                                    <div class="uploadbtn">
+                                        <input type="text" id="characterName" placeholder="Elliot Alderson" name="fname">
+                                    </div>
+                                    <br>
+                                    <h4> Image:</h4>
+                                    <div class="uploadbtn">
+                                        <input type="text" id="urlImage" placeholder="www.example.com" name="fname">
+                                    </div>
+                                    <br>
+                                    <div class="uploadbtn"><input type="submit" value="Upload" /></div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
         </section>
         <!-- End Portfolio Details Section -->
