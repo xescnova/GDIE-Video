@@ -28,7 +28,7 @@ volume.addEventListener('mousemove', volumebar);
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     volumebar()
-    //video.controls = true;
+        //video.controls = true;
     video.muted = false;
 
 }
@@ -45,7 +45,7 @@ function updateProgress() {
 function botonPlay() {
     var botonpl = document.getElementById("botonPlay");
     imgplay = document.getElementById("imgBoton")
-    botonpl.onclick = function () {
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -59,7 +59,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function () {
+    botonmt.onclick = function() {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -74,7 +74,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function () {
+    bS.onclick = function() {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -96,29 +96,23 @@ function volumebar() {
     }
 }
 
-function getCurrentTime(){     
+function getCurrentTime() {
     var btnTimer = document.getElementById("sel-tiempo");
-    var tInicio= document.getElementById("startTime");
-    var tFin= document.getElementById("endTime");
-    var tiempo = new Date(video.currentTime * 1000).toISOString().slice(11, 19);     
-    if(tFin.value)
-    {
+    var tInicio = document.getElementById("startTime");
+    var tFin = document.getElementById("endTime");
+    var tiempo = new Date(video.currentTime * 1000).toISOString().slice(11, 19);
+    if (tFin.value) {
         tFin.value = null;
         tInicio.value = null;
         btnTimer.textContent = "Seleccionar Tiempo";
-    }    
-    else
-    {
-        if(tInicio.value)
-        {              
+    } else {
+        if (tInicio.value) {
             tFin.value = tiempo;
             btnTimer.textContent = "Reset";
-        }
-        else
-        {
+        } else {
             tInicio.value = tiempo;
-        }  
-    }    
+        }
+    }
 }
 
 function plusTen() {
@@ -145,6 +139,7 @@ function openFullscreen() {
 personajes.oncuechange = event => {
     if (document.body.contains(document.getElementById('personajesCaja'))) {
         let cues = personajes.activeCues; // array of current cues
+        console.log(personajes.cues);
         var arrayPersonajes = JSON.parse(cues[0].text);
         var personajesDiv = document.getElementById("personajesCaja");
         personajesDiv.innerHTML = '';
@@ -155,5 +150,15 @@ personajes.oncuechange = event => {
             div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
             personajesDiv.appendChild(div.cloneNode(true));
         }
+    }
+}
+
+function listarEscenas() {
+    let cues = personajes.cues;
+    for (let i = 0; i < cues.length; i++) {
+        var escenasDiv = document.getElementById("escenasVideo");
+        var div = document.createElement('div');
+        div.innerHTML = '<p>' + cues[i].id + ' </p>';
+        escenasDiv.appendChild(div.cloneNode(true));
     }
 }
