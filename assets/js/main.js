@@ -17,6 +17,8 @@ const imgmute = document.getElementById("imgMute");
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
 var volumeValue = document.getElementById('valueVol');
+var botonpl = document.getElementById("botonPlay");
+var imgplay = document.getElementById("imgBoton")
 var tracks = video.textTracks;
 var escenas = tracks[0];
 var personajes = tracks[1];
@@ -28,15 +30,33 @@ video.addEventListener('timeupdate', updateProgress);
 video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 
+//seek.addEventListener('mousemove', updateSeekTooltip);
+
 
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
-    volumebar()
+    volumebar();
     //video.controls = true;
     video.muted = false;
 
 }
 
+function playvid()
+{
+    const videoWorks = !!document.createElement('video').canPlayType;
+    if (videoWorks) {
+        if(video.paused)
+        {
+            video.play();
+            imgplay.src = "assets/img/pause.png";
+        }
+        else
+        {
+            video.pause();
+            imgplay.src = "assets/img/play.png";
+        }
+    }
+}
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -69,8 +89,7 @@ function updateProgress() {
 
 //Play y pause del vídeo
 function botonPlay() {
-    var botonpl = document.getElementById("botonPlay");
-    imgplay = document.getElementById("imgBoton")
+    
     botonpl.onclick = function () {
         if (video.paused) {
             video.play();
