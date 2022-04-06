@@ -96,6 +96,31 @@ function volumebar() {
     }
 }
 
+function getCurrentTime(){     
+    var btnTimer = document.getElementById("sel-tiempo");
+    var tInicio= document.getElementById("startTime");
+    var tFin= document.getElementById("endTime");     
+    var tiempo=video.currentTime;     
+    if(tFin.value)
+    {
+        tFin.value = null;
+        tInicio.value = null;
+        btnTimer.textContent = "Seleccionar Tiempo";
+    }    
+    else
+    {
+        if(tInicio.value)
+        {              
+            tFin.value = tiempo;
+            btnTimer.textContent = "Reset";
+        }
+        else
+        {
+            tInicio.value = tiempo;
+        }  
+    }    
+}
+
 function plusTen() {
     video.currentTime = video.currentTime + 10;
 }
