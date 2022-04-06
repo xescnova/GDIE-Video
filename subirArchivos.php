@@ -21,11 +21,6 @@ table td{ padding:5px;}
 <div class="main">
 <h1>Subir archivo con PHP:</h1>
 <?php
-  // changing the upload limits
-  ini_set('upload_max_filesize', '500M');
-  ini_set('post_max_size', '500M');
-  ini_set('max_input_time', 300);
-  ini_set('max_execution_time', 300);
 $directorio = 'subirVideos/';
 $subir_archivo = $directorio.basename($_FILES['subir_archivo']['name']);
 echo "<div>";
