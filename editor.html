@@ -155,7 +155,7 @@
                         <div class="portfolio-info" style="margin-top:10px">
                             <h3>Upload video</h3>
                             <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+                                <input type="hidden" name="MAX_FILE_SIZE" value="51200000000000" />
                                 <h4> Enviar mi archivo:</h4>
                                 <input name="subir_archivo" type="file" />
                                 <div class="uploadbtn"><input type="submit" value="Upload" /></div>
@@ -164,21 +164,21 @@
                     </div>
 
                     <div class="col-lg-5">
-                        
+
                         <div class="row gy-4">
                             <div class="portfolio-info">
-                            <h3> Edit video (metadata):</h3>
-                            <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background:#fa2314;padding: 6px 12px;text-decoration: none;font-size:16px;margin: 4px 2px;cursor: pointer;" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
+                                <h3> Edit video (metadata):</h3>
+                                <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background:#fa2314;padding: 6px 12px;text-decoration: none;font-size:16px;margin: 4px 2px;cursor: pointer;" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
                                 <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+                                    <input type="hidden" name="metadatos" value="512000" />
                                     <h4> Time:</h4>
-                                    <div >
+                                    <div>
                                         <input type="text" id="startTime" placeholder="Tiempo Inicio" name="fname" disabled>
-                                        <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled> 
+                                        <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled>
                                     </div>
                                     <br>
                                     <h4> Actor:</h4>
-                                    <div >
+                                    <div>
                                         <input type="text" id="actorName" placeholder="Rami Malek" name="fname">
                                     </div>
                                     <br>
