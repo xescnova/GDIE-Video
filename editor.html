@@ -51,10 +51,10 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="index.html">Inicio</a></li>
                     <li><a class="nav-link scrollto" href="#">Editor</a></li>
-                    <li class="dropdown"><a href="#"><span>Drop Down</span>
+                    <li class="dropdown"><a href="#"><span>Videos</span>
                             <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="#">Drop Down 1</a></li>
+                            <li><a href="#">Videos</a></li>
                             <li class="dropdown"><a href="#"><span>Deep Drop
                                         Down</span> <i class="bi
                                             bi-chevron-right"></i></a>
@@ -168,27 +168,27 @@
                         <div class="row gy-4">
                             <div class="portfolio-info">
                                 <h3> Edit video (metadata):</h3>
+                                <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background:#fa2314;padding: 6px 12px;text-decoration: none;font-size:16px;margin: 4px 2px;cursor: pointer;" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
                                 <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
                                     <input type="hidden" name="metadatos" value="512000" />
                                     <h4> Time:</h4>
-                                    <div class="uploadbtn">
-                                        <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background: #fa2314;padding: 6px 12px;text-decoration: none;font-size: 16px;margin: 4px 2px;cursor: pointer;">Start</button>
-                                        <input type="text" id="startTime" placeholder="Start" name="fname">
-                                        <input type="text" id="endTime" placeholder="End" name="fname">
+                                    <div>
+                                        <input type="text" id="startTime" placeholder="Tiempo Inicio" name="fname" disabled>
+                                        <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled>
                                     </div>
                                     <br>
                                     <h4> Actor:</h4>
-                                    <div class="uploadbtn">
+                                    <div>
                                         <input type="text" id="actorName" placeholder="Rami Malek" name="fname">
                                     </div>
                                     <br>
                                     <h4> Character:</h4>
-                                    <div class="uploadbtn">
+                                    <div>
                                         <input type="text" id="characterName" placeholder="Elliot Alderson" name="fname">
                                     </div>
                                     <br>
                                     <h4> Image:</h4>
-                                    <div class="uploadbtn">
+                                    <div>
                                         <input type="text" id="urlImage" placeholder="www.example.com" name="fname">
                                     </div>
                                     <br>
