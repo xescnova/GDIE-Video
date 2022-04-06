@@ -41,25 +41,27 @@ function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
     var seconds = (timeInSeconds % 60).toString();
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
     return {
-     minutes, seconds
+        minutes,
+        seconds
     };
-  };
-  
+};
+
 function initializeVideo() {
     const videoDuration = Math.round(video.duration);
     const time = formatTime(videoDuration);
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
-  }
-  
-  function updateTimeElapsed() {
+    listarEscenas();
+}
+
+function updateTimeElapsed() {
     const time = formatTime(Math.round(video.currentTime));
     timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
     timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
-  }
+}
 
 function updateProgress() {
     var barpos = video.currentTime / video.duration;
@@ -181,10 +183,19 @@ personajes.oncuechange = event => {
 
 function listarEscenas() {
     let cues = personajes.cues;
+    console.log(cues);
     for (let i = 0; i < cues.length; i++) {
         var escenasDiv = document.getElementById("escenasVideo");
         var div = document.createElement('div');
-        div.innerHTML = '<p>' + cues[i].id + ' </p>';
+        div.innerHTML = '<p id="nombresP">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=100px;" onclick="eliminarCola(' + i + ')" type="submit">X</button></p>';
         escenasDiv.appendChild(div.cloneNode(true));
     }
+}
+
+function eliminarCola(id) {
+    personajes.removeCue(personajes.cues[id]);
+    document.getElementById("nombresP");
+    nombresP.innerHTML = '';
+    listarEscenas();
+    console.log(personajes.cues);
 }
