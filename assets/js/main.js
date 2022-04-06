@@ -99,8 +99,8 @@ function volumebar() {
 function getCurrentTime(){     
     var btnTimer = document.getElementById("sel-tiempo");
     var tInicio= document.getElementById("startTime");
-    var tFin= document.getElementById("endTime");     
-    var tiempo=video.currentTime;     
+    var tFin= document.getElementById("endTime");
+    var tiempo = new Date(video.currentTime * 1000).toISOString().slice(11, 19);     
     if(tFin.value)
     {
         tFin.value = null;
