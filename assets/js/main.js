@@ -8,13 +8,14 @@
 /**
  * Video Mr. Robot
  */
-
 const video = document.querySelector('.video');
 const bar = document.getElementById('progressBar');
 const playbtn = document.getElementById('playbtn');
 const volume = document.getElementById('volbar');
 const videoControls = video.controls;
 const imgmute = document.getElementById("imgMute");
+const timeElapsed = document.getElementById('time-elapsed');
+const duration = document.getElementById('duration');
 var volumeValue = document.getElementById('valueVol');
 var tracks = video.textTracks;
 var escenas = tracks[0];
@@ -22,8 +23,11 @@ var personajes = tracks[1];
 personajes.mode = "showing";
 escenas.mode = "hidden";
 
+video.addEventListener('loadedmetadata', initializeVideo);
 video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
+
 
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
@@ -33,12 +37,34 @@ if (videoWorks) {
 
 }
 
+function formatTime(timeInSeconds) {
+    //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
+    var minutes = Math.floor(timeInSeconds / 60).toString();
+    var seconds = (timeInSeconds % 60).toString();
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return {
+     minutes, seconds
+    };
+  };
+  
+function initializeVideo() {
+    const videoDuration = Math.round(video.duration);
+    const time = formatTime(videoDuration);
+    duration.innerText = `${time.minutes}:${time.seconds}`;
+    duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+  }
+  
+  function updateTimeElapsed() {
+    const time = formatTime(Math.round(video.currentTime));
+    timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
+    timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+  }
+
 function updateProgress() {
     var barpos = video.currentTime / video.duration;
     bar.style.width = barpos * 100 + "%";
 }
-
-
 
 
 //Play y pause del vídeo
