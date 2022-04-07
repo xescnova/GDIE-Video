@@ -31,7 +31,7 @@ video.addEventListener('loadedmetadata', initializeVideo);
 video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 video.addEventListener('timeupdate', timebar);
-timeVid.addEventListener('onchange', moveBar);
+timeVid.addEventListener('input', moveBar);
 //timeVid.addEventListener('mousemove', moveBar);
 //seek.addEventListener('mousemove', updateSeekTooltip);
 
@@ -39,9 +39,9 @@ timeVid.addEventListener('onchange', moveBar);
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     volumebar();
-        //video.controls = true;
+    timebar();
     video.muted = false;
-    timeVid.max = video.duration*100;
+    timeVid.max = Math.round(video.duration);
 
 }
 
@@ -149,7 +149,7 @@ function volumebar() {
 
 function timebar() {
     //bar.style.width = barpos * 100 + "%";
-    var timeval = (video.currentTime / video.duration) * 100;
+    var timeval = Math.round(video.currentTime);
     var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + timeval + '%, rgb(214,214,214)' + timeval + '%)';
     if(!video.paused)
     {
@@ -162,6 +162,8 @@ function timebar() {
 function moveBar() {
     video.pause();
     video.currentTime = timeVid.value;
+    imgplay.src = "assets/img/pause.png"
+    video.play();
 }
 
 function getCurrentTime() {
