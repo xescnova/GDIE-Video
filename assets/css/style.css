@@ -1170,7 +1170,7 @@ section {
     opacity: 90%;
     flex-wrap: wrap;
     background: rgb(48, 48, 48);
-    transform: translateY(100%) translateY(-7px);
+    transform: translateY(100%) translateY(-18px);
     transition: all 0.2s;
 }
 
