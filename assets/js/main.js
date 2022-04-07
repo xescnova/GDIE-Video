@@ -12,7 +12,7 @@ const video = document.querySelector('.video');
 const bar = document.getElementById('progressBar');
 const playbtn = document.getElementById('playbtn');
 const volume = document.getElementById('volbar');
-const timeVid = document.getElementById('timebar');
+var timeVid = document.getElementById('timebar');
 const videoControls = video.controls;
 const imgmute = document.getElementById("imgMute");
 const timeElapsed = document.getElementById('time-elapsed');
@@ -25,6 +25,7 @@ var escenas = tracks[0];
 var personajes = tracks[1];
 personajes.mode = "showing";
 escenas.mode = "hidden";
+
 
 video.addEventListener('loadedmetadata', initializeVideo);
 //video.addEventListener('timeupdate', updateProgress);
@@ -41,8 +42,6 @@ if (videoWorks) {
     volumebar();
     timebar();
     video.muted = false;
-    timeVid.max = Math.round(video.duration);
-
 }
 
 function playvid()
@@ -79,6 +78,7 @@ function initializeVideo() {
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
     listarEscenas();
+    timeVid.max = videoDuration;
 }
 
 function updateTimeElapsed() {
@@ -149,20 +149,19 @@ function volumebar() {
 
 function timebar() {
     //bar.style.width = barpos * 100 + "%";
-    var timeval = Math.round(video.currentTime);
+    var timeval = 100*Math.round(video.currentTime)/timeVid.max;
     var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + timeval + '%, rgb(214,214,214)' + timeval + '%)';
     if(!video.paused)
     {
-        timeVid.value = timeval;
+        timeVid.value = Math.round(video.currentTime);
     }
-    
     timeVid.style.background = color;  
 }
 
 function moveBar() {
     video.pause();
     video.currentTime = timeVid.value;
-    imgplay.src = "assets/img/pause.png"
+    imgplay.src = "assets/img/pause.png";
     video.play();
 }
 
