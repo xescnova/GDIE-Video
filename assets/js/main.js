@@ -17,12 +17,16 @@ const videoControls = video.controls;
 const imgmute = document.getElementById("imgMute");
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
+const select = document.getElementById("actorsAvailable");
 var volumeValue = document.getElementById('valueVol');
 var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
 var tracks = video.textTracks;
 var escenas = tracks[0];
 var personajes = tracks[1];
+var arr;
+const persJson = [];
+const imgJson = [];
 personajes.mode = "showing";
 escenas.mode = "hidden";
 
@@ -201,6 +205,35 @@ function openFullscreen() {
         video.msRequestFullscreen();
     }
 }
+
+function actorImg() {
+    var imagenActor = document.getElementById("imgActor");
+    for(var i=0;i<persJson.length; i++)
+    {
+        if (select.value == persJson[i])
+        {
+            imagenActor.src = "assets/"+imgJson[i];
+        }
+    }
+}
+
+$.getJSON('assets/json/actores.json', function(data) {
+    if (select)
+    {
+        arr = data;
+        for(var i=0;i<arr.length; i++)
+        {
+            var option = document.createElement("OPTION");
+            var txt = document.createTextNode(arr[i].Personaje);
+            option.appendChild(txt);
+            select.insertBefore(option,select.lastChild);
+            persJson.push(arr[i].Personaje);
+            imgJson.push(arr[i].Imagen);
+        }
+    }
+});                                               
+
+
 
 
 

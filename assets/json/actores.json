@@ -10,5 +10,35 @@
     "Personaje": "Mr. Robot",
     "URL":"https://es.wikipedia.org/wiki/Christian_Slater",
     "Imagen":"img/Christian_Slater.jpg"
-     }
+     },
+     {
+     "Nombre": "Aaron Takahashi",
+     "Personaje": "Lloyd Chong",
+     "URL":"https://en.wikipedia.org/wiki/Aaron_Takahashi",
+     "Imagen":"img/Aaron_Takahashi.jpg"
+      },
+      {
+      "Nombre": "Portia Doubleday",
+      "Personaje": "Angela Moss",
+      "URL":"https://es.wikipedia.org/wiki/Portia_Doubleday",
+      "Imagen":"img/Portia_Doubleday.jpg"
+       },
+      {
+      "Nombre": "Michel Gill",
+      "Personaje": "Gideon Goddard",
+      "URL":"https://es.wikipedia.org/wiki/Michel_Gill",
+      "Imagen":"img/Michel_Gill.jpg"
+       },
+       {
+       "Nombre": "Ben Rappaport",
+       "Personaje": "Ollie Parker",
+       "URL":"https://es.wikipedia.org/wiki/Ben_Rappaport",
+       "Imagen":"img/Ben_Rappaport.jpg"
+       },
+       {
+       "Nombre": "Gloria Reuben",
+       "Personaje": "Krista Gordon",
+       "URL":"https://es.wikipedia.org/wiki/Gloria_Reuben",
+       "Imagen":"img/Gloria_Reuben.jpg"
+       }
 ]
