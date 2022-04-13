@@ -254,3 +254,15 @@ function cambiarVideo() {
     video.load();
     video.play();
 }
+
+function ajaxCall() {
+    var data = new FormData();
+    data.append("escenas", personajes.cues);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "guardarEscenas.php");
+    xhr.onload = function() {
+        console.log(this.response);
+    }
+    xhr.send(data);
+    return false;
+}
