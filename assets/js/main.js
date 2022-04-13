@@ -28,6 +28,7 @@ escenas.mode = "hidden";
 
 
 video.addEventListener('loadedmetadata', initializeVideo);
+video.addEventListener('play', setDuration);
 video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 video.addEventListener('timeupdate', timebar);
@@ -53,6 +54,10 @@ function playvid() {
     }
 }
 
+function setDuration() {
+    timeVid.max = Math.round(video.duration);
+}
+
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -71,7 +76,8 @@ function initializeVideo() {
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
     listarEscenas();
-    timeVid.max = videoDuration;
+    timeVid.max = Math.round(video.duration);
+    //timeVid.setAttribute('max', videoDuration);
 }
 
 function updateTimeElapsed() {
