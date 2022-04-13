@@ -99,7 +99,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -113,7 +113,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -128,7 +128,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
+    bS.onclick = function () {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -249,7 +249,7 @@ personajes.oncuechange = event => {
             var div = document.createElement('div');
             div.setAttribute("class", "col-sm-2");
             div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
-            personajesDiv.appendChild(div.cloneNode(true));
+            personajesDiv.appendChild(div);
         }
     }
 }
@@ -262,7 +262,6 @@ function listarEscenas() {
         var div = document.createElement('div');
         div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
         escenasDiv.appendChild(div.cloneNode(true));
-
     }
 }
 
@@ -271,7 +270,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -289,4 +288,32 @@ function cambiarVideo() {
     source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/video2.mp4");
     video.load();
     video.play();
+}
+
+function crearDropdown() {
+    $.ajax({
+        url: "prueba.php",
+        type: "POST",
+        success: function(result) {
+            var videos = JSON.parse(result);
+            for (let index = 0; index < videos.length; index++) {
+                var listaVideos = document.getElementById("dropdown-videos");
+                var li = document.createElement('li');
+                li.innerHTML = '<a onclick="cambiarVideo()">'+videos[index]+'</a>';
+                listaVideos.appendChild(li);
+            }
+        }
+    });
+}
+
+function ajaxCall() {
+    var data = new FormData();
+    data.append("escenas", personajes.cues);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "guardarEscenas.php");
+    xhr.onload = function() {
+        console.log(this.response);
+    }
+    xhr.send(data);
+    return false;
 }
