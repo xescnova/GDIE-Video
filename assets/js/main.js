@@ -12,7 +12,7 @@ const video = document.querySelector('.video');
 const bar = document.getElementById('progressBar');
 const playbtn = document.getElementById('playbtn');
 const volume = document.getElementById('volbar');
-var timeVid = document.getElementById('timebar');
+const timeVid = document.getElementById('timebar');
 const videoControls = video.controls;
 const imgmute = document.getElementById("imgMute");
 const timeElapsed = document.getElementById('time-elapsed');
@@ -28,14 +28,11 @@ escenas.mode = "hidden";
 
 
 video.addEventListener('loadedmetadata', initializeVideo);
-//video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('play', setDuration);
 video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
-//timeVid.addEventListener('mousemove', moveBar);
-//seek.addEventListener('mousemove', updateSeekTooltip);
-
 
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
@@ -57,6 +54,10 @@ function playvid() {
     }
 }
 
+function setDuration() {
+    timeVid.max = Math.round(video.duration);
+}
+
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -75,7 +76,8 @@ function initializeVideo() {
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
     listarEscenas();
-    timeVid.max = videoDuration;
+    timeVid.max = Math.round(video.duration);
+    //timeVid.setAttribute('max', videoDuration);
 }
 
 function updateTimeElapsed() {
@@ -146,6 +148,7 @@ function volumebar() {
 
 function timebar() {
     //bar.style.width = barpos * 100 + "%";
+    //timeVid.max = videoDuration;
     var timeval = 100 * Math.round(video.currentTime) / timeVid.max;
     var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + timeval + '%, rgb(214,214,214)' + timeval + '%)';
     if (!video.paused) {

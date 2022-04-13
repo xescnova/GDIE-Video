@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Portfolio Details - Vesperr Bootstrap Template</title>
+    <title>Editor</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -111,7 +111,7 @@
                 <div class="row gy-4">
                     <div class="col-lg-5">
                         <div class="c-video">
-                            <video class="video" id="videoMrRobot" playsinline poster="assets/img/MrRobot.png">
+                            <video class="video" id="videoMrRobot" onclick="playvid()" playsinline poster="assets/img/MrRobot.png">
                                 <source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/videoGDIE.mkv">
                                 <track id="idSubtitulos" kind="subtitles" src="subtENG.vtt" srclang="en" label="">
                                 <track id="idMetadados" kind="metadata" src="escenas.vtt" srclang="no" label="Metadatos">
@@ -166,6 +166,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="portfolio-info" style="margin-top:10px">
                             <h3>Upload video</h3>
                             <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
