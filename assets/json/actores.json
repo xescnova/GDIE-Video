@@ -1,0 +1,14 @@
+[
+    {
+    "Nombre": "Rami Malek",
+    "Personaje": "Elliot Alderson",
+    "URL":"https://es.wikipedia.org/wiki/Rami_Malek",
+    "Imagen":"img/Rami_Malek.jpg"
+     },
+    {
+    "Nombre": "Christian Slater",
+    "Personaje": "Mr. Robot",
+    "URL":"https://es.wikipedia.org/wiki/Christian_Slater",
+    "Imagen":"img/Christian_Slater.jpg"
+     }
+]
