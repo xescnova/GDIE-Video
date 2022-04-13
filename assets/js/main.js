@@ -44,22 +44,19 @@ if (videoWorks) {
     video.muted = false;
 }
 
-function playvid()
-{
+function playvid() {
     const videoWorks = !!document.createElement('video').canPlayType;
     if (videoWorks) {
-        if(video.paused)
-        {
+        if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png";
-        }
-        else
-        {
+        } else {
             video.pause();
             imgplay.src = "assets/img/play.png";
         }
     }
 }
+
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -95,8 +92,8 @@ function updateTimeElapsed() {
 
 //Play y pause del vídeo
 function botonPlay() {
-    
-    botonpl.onclick = function () {
+
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -149,13 +146,12 @@ function volumebar() {
 
 function timebar() {
     //bar.style.width = barpos * 100 + "%";
-    var timeval = 100*Math.round(video.currentTime)/timeVid.max;
+    var timeval = 100 * Math.round(video.currentTime) / timeVid.max;
     var color = 'linear-gradient(90deg, rgb(251, 60, 60) ' + timeval + '%, rgb(214,214,214)' + timeval + '%)';
-    if(!video.paused)
-    {
+    if (!video.paused) {
         timeVid.value = Math.round(video.currentTime);
     }
-    timeVid.style.background = color;  
+    timeVid.style.background = color;
 }
 
 function moveBar() {
@@ -228,15 +224,33 @@ function listarEscenas() {
     for (let i = 0; i < cues.length; i++) {
         var escenasDiv = document.getElementById("escenasVideo");
         var div = document.createElement('div');
-        div.innerHTML = '<p id="nombresP">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=100px;" onclick="eliminarCola(' + i + ')" type="submit">X</button></p>';
+        div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
         escenasDiv.appendChild(div.cloneNode(true));
+
     }
 }
 
-function eliminarCola(id) {
-    personajes.removeCue(personajes.cues[id]);
-    document.getElementById("nombresP");
-    nombresP.innerHTML = '';
-    listarEscenas();
+//Elimina una escena, tanto el div como el la cola del vídeo.
+function eliminarCola(id, idColaActual) {
+    const idCola = "nombresP" + id;
+    document.getElementById(idCola);
+    console.log(idCola);
+    $(document).ready(function() {
+        $("#" + idCola).remove();
+    });
+    for (let i = 0; i < personajes.cues.length; i++) {
+        if (idColaActual == personajes.cues[i].id) {
+            personajes.removeCue(personajes.cues[i]);
+        }
+    }
+
     console.log(personajes.cues);
+}
+
+//Cambia de video con setAttribute
+function cambiarVideo() {
+    var source = document.getElementById("idVideo");
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/video2.mp4");
+    video.load();
+    video.play();
 }
