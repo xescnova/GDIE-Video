@@ -222,13 +222,15 @@ personajes.oncuechange = event => {
 }
 
 function listarEscenas() {
-    let cues = personajes.cues;
-    console.log(cues);
-    for (let i = 0; i < cues.length; i++) {
-        var escenasDiv = document.getElementById("escenasVideo");
-        var div = document.createElement('div');
-        div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
-        escenasDiv.appendChild(div.cloneNode(true));
+    if (document.body.contains(document.getElementById('escenasVideo'))) {
+        let cues = personajes.cues;
+        console.log(cues);
+        for (let i = 0; i < cues.length; i++) {
+            var escenasDiv = document.getElementById("escenasVideo");
+            var div = document.createElement('div');
+            div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
+            escenasDiv.appendChild(div.cloneNode(true));
+        }
     }
 }
 
@@ -261,12 +263,12 @@ function crearDropdown() {
     $.ajax({
         url: "prueba.php",
         type: "POST",
-        success: function(result) {
+        success: function (result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
                 var li = document.createElement('li');
-                li.innerHTML = '<a onclick="cambiarVideo()">'+videos[index]+'</a>';
+                li.innerHTML = '<a onclick="cambiarVideo()">' + videos[index] + '</a>';
                 listaVideos.appendChild(li);
             }
         }
@@ -278,7 +280,7 @@ function ajaxCall() {
     data.append("escenas", personajes.cues);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
-    xhr.onload = function() {
+    xhr.onload = function () {
         console.log(this.response);
     }
     xhr.send(data);
