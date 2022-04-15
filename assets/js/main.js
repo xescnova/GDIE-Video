@@ -294,7 +294,7 @@ function cambiarVideo() {
 
 function crearDropdown() {
     $.ajax({
-        url: "prueba.php",
+        url: "listarVideos.php",
         type: "POST",
         success: function (result) {
             var videos = JSON.parse(result);
