@@ -285,9 +285,9 @@ function eliminarCola(id, idColaActual) {
 }
 
 //Cambia de video con setAttribute
-function cambiarVideo() {
+function cambiarVideo(video) {
     var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/video2.mp4");
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + video);
     video.load();
     video.play();
 }
@@ -301,7 +301,7 @@ function crearDropdown() {
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
                 var li = document.createElement('li');
-                li.innerHTML = '<a onclick="cambiarVideo()">' + videos[index] + '</a>';
+                li.innerHTML = '<a onclick="cambiarVideo('+videos[index]+')">' + videos[index] + '</a>';
                 listaVideos.appendChild(li);
             }
         }
