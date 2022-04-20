@@ -317,13 +317,21 @@ function ajaxCall() {
     //var data = new FormData();
     //console.log(personajes.cues);
     var escenas = JSON.stringify(personajes.cues[0]);
-    console.log(escenas);
+    var array = [];
+    for (var i = 0; i < personajes.cues.length; i++) {
+        const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
+        array.push(colasActivas);
+    }
+    //console.log(array);
+    var json = JSON.stringify(array);
+    // console.log(json);
     //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         console.log(this.response);
     }
-    xhr.send(escenas);
+    xhr.send(json);
     return false;
 }
