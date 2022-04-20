@@ -281,7 +281,7 @@ function eliminarCola(id, idColaActual) {
         }
     }
 
-    console.log(personajes.cues);
+    // console.log(personajes.cues);
 }
 
 //Cambia de video con setAttribute
@@ -309,13 +309,16 @@ function crearDropdown() {
 }
 
 function ajaxCall() {
-    var data = new FormData();
-    data.append("escenas", personajes.cues);
+    //var data = new FormData();
+    //console.log(personajes.cues);
+    var escenas = JSON.stringify(personajes.cues[0]);
+    console.log(escenas);
+    //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.onload = function () {
         console.log(this.response);
     }
-    xhr.send(data);
+    xhr.send(escenas);
     return false;
 }
