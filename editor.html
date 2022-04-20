@@ -195,21 +195,13 @@
                                         <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled>
                                     </div>
                                     <br>
-                                    <h4> Actor:</h4>
-                                    <div>
-                                        <input type="text" id="actorName" placeholder="Rami Malek" name="fname">
-                                    </div>
-                                    <br>
                                     <h4> Character:</h4>
-                                    <div>
-                                        <input type="text" id="characterName" placeholder="Elliot Alderson" name="fname">
+                                    <div> <!-- onchange="doSomething();" -->
+                                        <select name="character" onchange="actorImg();" id="actorsAvailable"></select>
                                     </div>
                                     <br>
-                                    <h4> Image:</h4>
-                                    <div>
-                                        <input type="text" id="urlImage" placeholder="www.example.com" name="fname">
-                                    </div>
-                                    <br>
+                                    <img id="imgActor" src="assets/img/Rami_Malek.jpg" width="175px"></button>
+                                    <br><br>
                                     <div class="uploadbtn"><input type="submit" value="Upload" /></div>
 
                                 </form>
@@ -260,7 +252,6 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js "></script>
-    <script src="js/xray.js "></script>
 </body>
 
 </html>

@@ -17,12 +17,16 @@ const videoControls = video.controls;
 const imgmute = document.getElementById("imgMute");
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
+const select = document.getElementById("actorsAvailable");
 var volumeValue = document.getElementById('valueVol');
 var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
 var tracks = video.textTracks;
 var escenas = tracks[0];
 var personajes = tracks[1];
+var arr;
+const persJson = [];
+const imgJson = [];
 personajes.mode = "showing";
 escenas.mode = "hidden";
 
@@ -95,7 +99,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -109,7 +113,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -124,7 +128,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
+    bS.onclick = function () {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -202,6 +206,35 @@ function openFullscreen() {
     }
 }
 
+function actorImg() {
+    var imagenActor = document.getElementById("imgActor");
+    for(var i=0;i<persJson.length; i++)
+    {
+        if (select.value == persJson[i])
+        {
+            imagenActor.src = "assets/"+imgJson[i];
+        }
+    }
+}
+
+$.getJSON('assets/json/actores.json', function(data) {
+    if (select)
+    {
+        arr = data;
+        for(var i=0;i<arr.length; i++)
+        {
+            var option = document.createElement("OPTION");
+            var txt = document.createTextNode(arr[i].Personaje);
+            option.appendChild(txt);
+            select.insertBefore(option,select.lastChild);
+            persJson.push(arr[i].Personaje);
+            imgJson.push(arr[i].Imagen);
+        }
+    }
+});                                               
+
+
+
 
 
 personajes.oncuechange = event => {
@@ -214,22 +247,23 @@ personajes.oncuechange = event => {
         for (let index = 0; index < arrayPersonajes.length; index++) {
             var personajesDiv = document.getElementById("personajesCaja");
             var div = document.createElement('div');
-            div.setAttribute("class", "col-sm-2");
-            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="300px" width="200px"><div class="card-block px-2"><h2 class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></h2><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
-            personajesDiv.appendChild(div.cloneNode(true));
+            div.setAttribute("class", "card");
+            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="100px"><div class="card-block px-2"><p class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></p><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
+            personajesDiv.appendChild(div);
         }
     }
 }
 
 function listarEscenas() {
-    let cues = personajes.cues;
-    console.log(cues);
-    for (let i = 0; i < cues.length; i++) {
-        var escenasDiv = document.getElementById("escenasVideo");
-        var div = document.createElement('div');
-        div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
-        escenasDiv.appendChild(div.cloneNode(true));
-
+    if (document.body.contains(document.getElementById('escenasVideo'))) {
+        let cues = personajes.cues;
+        console.log(cues);
+        for (let i = 0; i < cues.length; i++) {
+            var escenasDiv = document.getElementById("escenasVideo");
+            var div = document.createElement('div');
+            div.innerHTML = '<div class="card"><div class="card-body"><p id="nombresP' + i + '">Nombre: ' + cues[i].id + '---Duración: ' + cues[i].startTime + '---' + cues[i].endTime + 's' + ' <button class="btn btn-primary" style="float:right;padding-right=600px" onclick="eliminarCola(' + i + ",'" + cues[i].id + "'" + ')" type="submit">X</button></p></div></div>';
+            escenasDiv.appendChild(div.cloneNode(true));
+        }
     }
 }
 
@@ -238,7 +272,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -251,11 +285,27 @@ function eliminarCola(id, idColaActual) {
 }
 
 //Cambia de video con setAttribute
-function cambiarVideo() {
+function cambiarVideo(video) {
     var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/video2.mp4");
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + video);
     video.load();
     video.play();
+}
+
+function crearDropdown() {
+    $.ajax({
+        url: "listarVideos.php",
+        type: "POST",
+        success: function (result) {
+            var videos = JSON.parse(result);
+            for (let index = 0; index < videos.length; index++) {
+                var listaVideos = document.getElementById("dropdown-videos");
+                var li = document.createElement('li');
+                li.innerHTML = '<a onclick="cambiarVideo('+videos[index]+')">' + videos[index] + '</a>';
+                listaVideos.appendChild(li);
+            }
+        }
+    });
 }
 
 function ajaxCall() {
@@ -266,7 +316,7 @@ function ajaxCall() {
     //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
-    xhr.onload = function() {
+    xhr.onload = function () {
         console.log(this.response);
     }
     xhr.send(escenas);
