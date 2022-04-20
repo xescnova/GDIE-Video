@@ -4,7 +4,7 @@ $handle = opendir("assets/img/");
 
 if ($handle) {
     while (($entry = readdir($handle)) !== FALSE) {
-        if (($entry != ".") && ($entry != "..") && (((strpos($entry, '.jpg') !== false) || (strpos($entry, '.ogg') !== false)))) {
+        if (($entry != ".") && ($entry != "..") && (((strpos($entry, '.mp4') !== false) || (strpos($entry, '.jpg') !== false)))) {
             $arrFiles[] = $entry;
         }
     }
