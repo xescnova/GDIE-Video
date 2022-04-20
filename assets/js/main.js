@@ -248,7 +248,7 @@ personajes.oncuechange = event => {
             var personajesDiv = document.getElementById("personajesCaja");
             var div = document.createElement('div');
             div.setAttribute("class", "card");
-            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="100px"><div class="card-block px-2"><p class="card-title"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></p><p class="card-text">' + arrayPersonajes[index].Personaje + '</p></div>';
+            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></p><p class="card-text" style="text-align: center">' + arrayPersonajes[index].Personaje + '</p></div>';
             personajesDiv.appendChild(div);
         }
     }
