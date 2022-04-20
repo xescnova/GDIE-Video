@@ -99,7 +99,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function () {
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -113,7 +113,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function () {
+    botonmt.onclick = function() {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -128,7 +128,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function () {
+    bS.onclick = function() {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -208,30 +208,26 @@ function openFullscreen() {
 
 function actorImg() {
     var imagenActor = document.getElementById("imgActor");
-    for(var i=0;i<persJson.length; i++)
-    {
-        if (select.value == persJson[i])
-        {
-            imagenActor.src = "assets/"+imgJson[i];
+    for (var i = 0; i < persJson.length; i++) {
+        if (select.value == persJson[i]) {
+            imagenActor.src = "assets/" + imgJson[i];
         }
     }
 }
 
 $.getJSON('assets/json/actores.json', function(data) {
-    if (select)
-    {
+    if (select) {
         arr = data;
-        for(var i=0;i<arr.length; i++)
-        {
+        for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
             var txt = document.createTextNode(arr[i].Personaje);
             option.appendChild(txt);
-            select.insertBefore(option,select.lastChild);
+            select.insertBefore(option, select.lastChild);
             persJson.push(arr[i].Personaje);
             imgJson.push(arr[i].Imagen);
         }
     }
-});                                               
+});
 
 
 
@@ -272,7 +268,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -296,12 +292,12 @@ function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function (result) {
+        success: function(result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
                 var li = document.createElement('li');
-                li.innerHTML = '<a onclick="cambiarVideo('+videos[index]+')">' + videos[index] + '</a>';
+                li.innerHTML = '<a onclick="cambiarVideo(' + videos[index] + ')">' + videos[index] + '</a>';
                 listaVideos.appendChild(li);
             }
         }
@@ -312,13 +308,21 @@ function ajaxCall() {
     //var data = new FormData();
     //console.log(personajes.cues);
     var escenas = JSON.stringify(personajes.cues[0]);
-    console.log(escenas);
+    var array = [];
+    for (var i = 0; i < personajes.cues.length; i++) {
+        const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
+        array.push(colasActivas);
+    }
+    //console.log(array);
+    var json = JSON.stringify(array);
+    // console.log(json);
     //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
-    xhr.onload = function () {
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function() {
         console.log(this.response);
     }
-    xhr.send(escenas);
+    xhr.send(json);
     return false;
 }
