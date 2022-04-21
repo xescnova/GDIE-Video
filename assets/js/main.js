@@ -215,6 +215,18 @@ function actorImg() {
     }
 }
 
+function addActor() { //
+    var charsSel = document.getElementById("selectorschar");
+    var divSel = document.createElement('div');
+    divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable2"></select> ';
+    charsSel.appendChild(divSel);
+    var charsCard = document.getElementById("addCharacters");
+    var div = document.createElement('div');
+    div.setAttribute("class", "card");
+    div.innerHTML = '<img id="imgActor" class="editor-img" src="assets/img/Rami_Malek.jpg" width="125px">';
+    charsCard.appendChild(div);
+}
+
 $.getJSON('assets/json/actores.json', function (data) {
     if (select) {
         arr = data;
@@ -276,16 +288,13 @@ function eliminarCola(id, idColaActual) {
             personajes.removeCue(personajes.cues[i]);
         }
     }
-
-    // console.log(personajes.cues);
 }
 
 //Cambia de video con setAttribute
 function cambiarVideo(src) {
-    var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + src);
+    video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
+    video.setAttribute("poster", "assets/img/"+src.split('.').slice(0, -1).join('.')+".png");
     video.load();
-    video.play();
 }
 
 /*
