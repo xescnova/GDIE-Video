@@ -208,30 +208,26 @@ function openFullscreen() {
 
 function actorImg() {
     var imagenActor = document.getElementById("imgActor");
-    for(var i=0;i<persJson.length; i++)
-    {
-        if (select.value == persJson[i])
-        {
-            imagenActor.src = "assets/"+imgJson[i];
+    for (var i = 0; i < persJson.length; i++) {
+        if (select.value == persJson[i]) {
+            imagenActor.src = "assets/" + imgJson[i];
         }
     }
 }
 
-$.getJSON('assets/json/actores.json', function(data) {
-    if (select)
-    {
+$.getJSON('assets/json/actores.json', function (data) {
+    if (select) {
         arr = data;
-        for(var i=0;i<arr.length; i++)
-        {
+        for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
             var txt = document.createTextNode(arr[i].Personaje);
             option.appendChild(txt);
-            select.insertBefore(option,select.lastChild);
+            select.insertBefore(option, select.lastChild);
             persJson.push(arr[i].Personaje);
             imgJson.push(arr[i].Imagen);
         }
     }
-});                                               
+});
 
 
 
@@ -285,12 +281,21 @@ function eliminarCola(id, idColaActual) {
 }
 
 //Cambia de video con setAttribute
-function cambiarVideo(video) {
+function cambiarVideo(src) {
     var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + video);
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + src);
     video.load();
     video.play();
 }
+
+/*
+function cambiarVideo() {
+    var source = document.getElementById("idVideo");
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/Slap.mp4");
+    video.load();
+    video.play();
+}
+*/
 
 function crearDropdown() {
     $.ajax({
@@ -301,7 +306,7 @@ function crearDropdown() {
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
                 var li = document.createElement('li');
-                li.innerHTML = '<a onclick="cambiarVideo('+videos[index]+')">' + videos[index] + '</a>';
+                li.innerHTML = '<a onclick="cambiarVideo(' + "'" + videos[index] + "'" + ')">' + videos[index] + '</a>';
                 listaVideos.appendChild(li);
             }
         }
@@ -312,13 +317,21 @@ function ajaxCall() {
     //var data = new FormData();
     //console.log(personajes.cues);
     var escenas = JSON.stringify(personajes.cues[0]);
-    console.log(escenas);
+    var array = [];
+    for (var i = 0; i < personajes.cues.length; i++) {
+        const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
+        array.push(colasActivas);
+    }
+    //console.log(array);
+    var json = JSON.stringify(array);
+    // console.log(json);
     //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         console.log(this.response);
     }
-    xhr.send(escenas);
+    xhr.send(json);
     return false;
 }
