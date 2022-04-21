@@ -1,6 +1,6 @@
 <?php
 $arrFiles = array();
-$handle = opendir("assets/img/");
+$handle = opendir("/video/");
 
 if ($handle) {
     while (($entry = readdir($handle)) !== FALSE) {
