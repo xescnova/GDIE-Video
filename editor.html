@@ -185,24 +185,29 @@
 
                         <div class="row gy-4">
                             <div class="portfolio-info">
-                                <h3> Edit video (metadata):</h3>
-                                <button style="background: #fa2314;border-radius: 5px; border: none;color: rgb(249, 247, 247);background:#fa2314;padding: 6px 12px;text-decoration: none;font-size:16px;margin: 4px 2px;cursor: pointer;" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
+                                <h3> Edit video (metadata)</h3>
+                                <h4> Time</h4>
+                                <button class="btn-editor" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
                                 <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
                                     <input type="hidden" name="metadatos" value="512000" />
-                                    <h4> Time:</h4>
                                     <div>
                                         <input type="text" id="startTime" placeholder="Tiempo Inicio" name="fname" disabled>
                                         <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled>
                                     </div>
                                     <br>
-                                    <h4> Character:</h4>
-                                    <div> <!-- onchange="doSomething();" -->
-                                        <select name="character" onchange="actorImg();" id="actorsAvailable"></select>
+                                    <div class="col-4">
+                                        <h4> Character </h4>
+                                        <div> <!-- onchange="doSomething();" onclick="botonMuted()"-->
+                                            <select name="character" class="selector-actor" onchange="actorImg();" id="actorsAvailable"></select>
+                                        </div>
+                                        <br>
+                                        <div class="cards-editor" id="addCharacters">
+                                            <img id="imgActor" class="editor-img" src="assets/img/Rami_Malek.jpg" width="125px">
+                                            <button id="moreactors" class="add-actor"  type="button">+</button>
+                                        </div>
+                                        <br><br>
+                                        <div class="uploadbtn"><input type="submit" value="Upload" /></div>
                                     </div>
-                                    <br>
-                                    <img id="imgActor" src="assets/img/Rami_Malek.jpg" width="175px"></button>
-                                    <br><br>
-                                    <div class="uploadbtn"><input type="submit" value="Upload" /></div>
 
                                 </form>
                             </div>
