@@ -99,7 +99,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -113,7 +113,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -128,7 +128,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
+    bS.onclick = function () {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -215,7 +215,7 @@ function actorImg() {
     }
 }
 
-$.getJSON('assets/json/actores.json', function(data) {
+$.getJSON('assets/json/actores.json', function (data) {
     if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
@@ -268,7 +268,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -281,23 +281,32 @@ function eliminarCola(id, idColaActual) {
 }
 
 //Cambia de video con setAttribute
-function cambiarVideo(video) {
+function cambiarVideo(src) {
     var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + video);
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + src);
     video.load();
     video.play();
 }
+
+/*
+function cambiarVideo() {
+    var source = document.getElementById("idVideo");
+    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/Slap.mp4");
+    video.load();
+    video.play();
+}
+*/
 
 function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function(result) {
+        success: function (result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
                 var li = document.createElement('li');
-                li.innerHTML = '<a onclick="cambiarVideo(' + videos[index] + ')">' + videos[index] + '</a>';
+                li.innerHTML = '<a onclick="cambiarVideo(' + "'" + videos[index] + "'" + ')">' + videos[index] + '</a>';
                 listaVideos.appendChild(li);
             }
         }
@@ -320,7 +329,7 @@ function ajaxCall() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function() {
+    xhr.onload = function () {
         console.log(this.response);
     }
     xhr.send(json);
