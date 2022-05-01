@@ -218,7 +218,7 @@ function actorImg() {
 function addActor() { //
     var charsSel = document.getElementById("selectorschar");
     var divSel = document.createElement('div');
-    divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable2"></select> ';
+    divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable2"></select>';
     charsSel.appendChild(divSel);
     var charsCard = document.getElementById("addCharacters");
     var div = document.createElement('div');
