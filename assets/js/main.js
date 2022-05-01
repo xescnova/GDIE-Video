@@ -37,6 +37,7 @@ video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
+video.addEventListener('play', setDuration);
 
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
@@ -216,19 +217,20 @@ function actorImg() {
 }
 
 function addActor() { //
-    var charsSel = document.getElementById("selectorschar");
-    var divSel = document.createElement('div');
-    divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable2"></select>';
-    charsSel.appendChild(divSel);
+    //var charsSel = document.getElementById("selectorschar");
+    //var divSel = document.createElement('select');
+    //divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable"></select>';
+    
     var charsCard = document.getElementById("addCharacters");
     var div = document.createElement('div');
     div.setAttribute("class", "card");
     div.innerHTML = '<img id="imgActor" class="editor-img" src="assets/img/Rami_Malek.jpg" width="125px">';
+    //charsSel.appendChild(divSel);
     charsCard.appendChild(div);
 }
 
 $.getJSON('assets/json/actores.json', function (data) {
-    if (select) {
+    if (select){
         arr = data;
         for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
