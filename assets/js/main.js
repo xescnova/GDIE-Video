@@ -256,7 +256,7 @@ personajes.oncuechange = event => {
             var personajesDiv = document.getElementById("personajesCaja");
             var div = document.createElement('div');
             div.setAttribute("class", "card");
-            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></p><p class="card-text" style="text-align: center">' + arrayPersonajes[index].Personaje + '</p></div>';
+            div.innerHTML = '<img onclick="infoActor(' + "'" + arrayPersonajes[index].URL + "'" + ')" src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"></p><p class="card-text" style="text-align: center">' + arrayPersonajes[index].Personaje + '</p></div>';
             personajesDiv.appendChild(div);
         }
     }
@@ -319,6 +319,29 @@ function crearDropdown() {
                 listaVideos.appendChild(li);
             }
         }
+    });
+}
+
+function infoActor(idIMDB) {
+    var settings = {
+        "url": "https://imdb-api.com/API/Name/k_srpdxysi/" + idIMDB,
+        "method": "GET",
+        "timeout": 0,
+    };
+
+    $.ajax(settings).done(function (response) {
+        //console.log(response);
+        var infoP = document.getElementById("infoPersonaje");
+        infoP.innerHTML = ' ';
+        var div = document.createElement('div');
+        div.setAttribute("class", "card");
+        var conocido = []
+        var arraypelis = response["knownFor"];
+        for (var i = 0; i < arraypelis.length; i++) {
+            conocido.push(arraypelis[i].fullTitle + "");
+        }
+        div.innerHTML = '<img src="assets/' + response["image"] + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><h2>' + response["name"] + '</h2></p><h4>Biografía:</h4><p class="card-text" style="text-align: center">' + response["summary"] + '</p><h4>Conocido por:</h4><p class="card-text" style="text-align: center">' + conocido.toString() + '</p></div>';
+        infoP.appendChild(div.cloneNode(true));
     });
 }
 
