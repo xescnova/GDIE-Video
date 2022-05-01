@@ -172,24 +172,26 @@
 
                         <div class="row gy-4">
                             <div class="portfolio-info">
-                                <h3> Edit video (metadata)</h3>
-                                <h4> Time</h4>
-                                <button class="btn-editor" id="sel-tiempo" onclick="getCurrentTime()">Seleccionar Tiempo</button>
+                                <h3> Edit video (metadata) </h3>
+                                <h4> Title </h4>
+                                <input type="text" id="title" placeholder="Video title" name="fname" >
+                                <br><br>
+                                <h4> Time </h4>
+                                <button class="btn-editor" id="sel-tiempo" onclick="getCurrentTime()">Start time</button>
                                 <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
                                     <input type="hidden" name="metadatos" value="512000" />
                                     <div>
-                                        <input type="text" id="startTime" placeholder="Tiempo Inicio" name="fname" disabled>
-                                        <input type="text" id="endTime" placeholder="Tiempo Final" name="fname" disabled>
+                                        <input type="text" id="startTime" placeholder="Start time" name="fname" disabled>
+                                        <input type="text" id="endTime" placeholder="End time" name="fname" disabled>
                                     </div>
                                     <br>
-                                    <div class="container">
                                         <div class="col-4">
                                             <h4> Character </h4>
                                         <div id="selectorschar"> <!-- onchange="doSomething();" onclick="botonMuted()"-->
                                             <select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable"></select>
                                         </div>
                                         <div class="masymenos">
-                                            <button id="moreactors"  onclick="addActor()" class="add-actor"  type="button">-</button>
+                                            <button id="moreactors"  onclick="removeActor()" class="add-actor"  type="button">-</button>
                                             <button id="moreactors"  onclick="addActor()" class="add-actor"  type="button">+</button>
                                         </div>
                                         <div class="cards-editor" id="addCharacters">
@@ -197,8 +199,6 @@
                                         <br><br>
                                         <div class="uploadbtn"><input type="submit" value="Upload" /></div>
                                         </div>
-                                    </div>
-
                                 </form>
                             </div>
                         </div>

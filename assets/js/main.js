@@ -21,10 +21,14 @@ const select = document.getElementById("actorsAvailable");
 var volumeValue = document.getElementById('valueVol');
 var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
+var act = document.getElementById("imgBoton");
 var tracks = video.textTracks;
 var escenas = tracks[0];
 var personajes = tracks[1];
-var arr;
+var actorImgId = 0;
+var actorImgCount = [];
+var selectedActor;
+var actoresDeLaEscena = []; // Personajes que se guardan en la escena
 const persJson = [];
 const imgJson = [];
 personajes.mode = "showing";
@@ -177,7 +181,7 @@ function getCurrentTime() {
     if (tFin.value) {
         tFin.value = null;
         tInicio.value = null;
-        btnTimer.textContent = "Seleccionar Tiempo";
+        btnTimer.textContent = "Start time";
     } else {
         if (tInicio.value) {
             tFin.value = tiempo;
@@ -207,43 +211,50 @@ function openFullscreen() {
     }
 }
 
-function actorImg() {
-    var imagenActor = document.getElementById("imgActor");
-    for (var i = 0; i < persJson.length; i++) {
-        if (select.value == persJson[i]) {
-            imagenActor.src = "assets/" + imgJson[i];
-        }
-    }
-}
-
-function addActor() { //
-    //var charsSel = document.getElementById("selectorschar");
-    //var divSel = document.createElement('select');
-    //divSel.innerHTML = '<select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable"></select>';
-    
+function addActor() { 
     var charsCard = document.getElementById("addCharacters");
     var div = document.createElement('div');
+    div.setAttribute("id", "imgActor"+actorImgId);
     div.setAttribute("class", "card");
-    div.innerHTML = '<img id="imgActor" class="editor-img" src="assets/img/Rami_Malek.jpg" width="125px">';
-    //charsSel.appendChild(divSel);
+    div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
+    actorImgCount.push("imgActor"+actorImgId);
     charsCard.appendChild(div);
+    actorImgId++;
+    actoresDeLaEscena.push(select.value);   
 }
 
+function removeActor() { //
+    if(actorImgCount.length>0){
+        var charsCard = document.getElementById("addCharacters");
+        charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length-1]));
+        actorImgCount.pop();
+        actorImgId--; 
+    }
+    
+}
 $.getJSON('assets/json/actores.json', function (data) {
     if (select){
         arr = data;
         for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
-            var txt = document.createTextNode(arr[i].Personaje);
+            var txt = document.createTextNode(arr[i].Nombre);
             option.appendChild(txt);
             select.insertBefore(option, select.lastChild);
-            persJson.push(arr[i].Personaje);
+            persJson.push(arr[i].Nombre);
             imgJson.push(arr[i].Imagen);
+            selectedActor = "assets/" + imgJson[0];
         }
     }
 });
 
 
+function actorImg() {
+    for (var i = 0; i < persJson.length; i++) {
+        if (select.value == persJson[i]) {
+            selectedActor = "assets/" + imgJson[i];
+        }
+    }
+}
 
 
 
