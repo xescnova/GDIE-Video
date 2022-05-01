@@ -21,10 +21,14 @@ const select = document.getElementById("actorsAvailable");
 var volumeValue = document.getElementById('valueVol');
 var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
+var act = document.getElementById("imgBoton");
 var tracks = video.textTracks;
 var escenas = tracks[0];
 var personajes = tracks[1];
-var arr;
+var actorImgId = 0;
+var actorImgCount = [];
+var selectedActor;
+var actoresDeLaEscena = []; // Personajes que se guardan en la escena
 const persJson = [];
 const imgJson = [];
 personajes.mode = "showing";
@@ -37,6 +41,7 @@ video.addEventListener('timeupdate', updateTimeElapsed);
 volume.addEventListener('mousemove', volumebar);
 video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
+video.addEventListener('play', setDuration);
 
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
@@ -176,7 +181,7 @@ function getCurrentTime() {
     if (tFin.value) {
         tFin.value = null;
         tInicio.value = null;
-        btnTimer.textContent = "Seleccionar Tiempo";
+        btnTimer.textContent = "Start time";
     } else {
         if (tInicio.value) {
             tFin.value = tiempo;
@@ -206,30 +211,50 @@ function openFullscreen() {
     }
 }
 
-function actorImg() {
-    var imagenActor = document.getElementById("imgActor");
-    for (var i = 0; i < persJson.length; i++) {
-        if (select.value == persJson[i]) {
-            imagenActor.src = "assets/" + imgJson[i];
-        }
-    }
+function addActor() {
+    var charsCard = document.getElementById("addCharacters");
+    var div = document.createElement('div');
+    div.setAttribute("id", "imgActor" + actorImgId);
+    div.setAttribute("class", "card");
+    div.innerHTML = '<img id="img' + actorImgId + '" class="editor-img" src=' + selectedActor + ' width="125px">';
+    actorImgCount.push("imgActor" + actorImgId);
+    charsCard.appendChild(div);
+    actorImgId++;
+    actoresDeLaEscena.push(select.value);
 }
 
+function removeActor() { //
+    if (actorImgCount.length > 0) {
+        var charsCard = document.getElementById("addCharacters");
+        charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length - 1]));
+        actorImgCount.pop();
+        actorImgId--;
+    }
+
+}
 $.getJSON('assets/json/actores.json', function(data) {
     if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
-            var txt = document.createTextNode(arr[i].Personaje);
+            var txt = document.createTextNode(arr[i].Nombre);
             option.appendChild(txt);
             select.insertBefore(option, select.lastChild);
-            persJson.push(arr[i].Personaje);
+            persJson.push(arr[i].Nombre);
             imgJson.push(arr[i].Imagen);
+            selectedActor = "assets/" + imgJson[0];
         }
     }
 });
 
 
+function actorImg() {
+    for (var i = 0; i < persJson.length; i++) {
+        if (select.value == persJson[i]) {
+            selectedActor = "assets/" + imgJson[i];
+        }
+    }
+}
 
 
 
@@ -244,7 +269,7 @@ personajes.oncuechange = event => {
             var personajesDiv = document.getElementById("personajesCaja");
             var div = document.createElement('div');
             div.setAttribute("class", "card");
-            div.innerHTML = '<img src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><a href="' + arrayPersonajes[index].URL + '" target="_blank">' + arrayPersonajes[index].Nombre + '</a></p><p class="card-text" style="text-align: center">' + arrayPersonajes[index].Personaje + '</p></div>';
+            div.innerHTML = '<img onclick="infoActor(' + "'" + arrayPersonajes[index].URL + "'" + ')" src="assets/' + arrayPersonajes[index].Imagen + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"></p><p class="card-text" style="text-align: center">' + arrayPersonajes[index].Personaje + '</p></div>';
             personajesDiv.appendChild(div);
         }
     }
@@ -276,16 +301,13 @@ function eliminarCola(id, idColaActual) {
             personajes.removeCue(personajes.cues[i]);
         }
     }
-
-    // console.log(personajes.cues);
 }
 
 //Cambia de video con setAttribute
 function cambiarVideo(src) {
-    var source = document.getElementById("idVideo");
-    source.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/subirVideos/" + src);
+    video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
+    video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
     video.load();
-    video.play();
 }
 
 /*
@@ -310,6 +332,29 @@ function crearDropdown() {
                 listaVideos.appendChild(li);
             }
         }
+    });
+}
+
+function infoActor(idIMDB) {
+    var settings = {
+        "url": "https://imdb-api.com/API/Name/k_srpdxysi/" + idIMDB,
+        "method": "GET",
+        "timeout": 0,
+    };
+
+    $.ajax(settings).done(function(response) {
+        //console.log(response);
+        var infoP = document.getElementById("infoPersonaje");
+        infoP.innerHTML = ' ';
+        var div = document.createElement('div');
+        div.setAttribute("class", "card");
+        var conocido = []
+        var arraypelis = response["knownFor"];
+        for (var i = 0; i < arraypelis.length; i++) {
+            conocido.push(arraypelis[i].fullTitle + "");
+        }
+        div.innerHTML = '<img src="assets/' + response["image"] + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><h2>' + response["name"] + '</h2></p><h4>Biografía:</h4><p class="card-text" style="text-align: center">' + response["summary"] + '</p><h4>Conocido por:</h4><p class="card-text" style="text-align: center">' + conocido.toString() + '</p></div>';
+        infoP.appendChild(div.cloneNode(true));
     });
 }
 
