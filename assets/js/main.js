@@ -218,17 +218,33 @@ function addActor() {
     div.setAttribute("class", "card");
     div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
     actorImgCount.push("imgActor"+actorImgId);
+    //document.querySelector('div.selectorschar option[value='+select.value+']').setAttribute("disabled", "");
+        //setAttribute("disabled", "");
+        //persJson imgJson 
+    select.options[select.selectedIndex].setAttribute("disabled", "");
     charsCard.appendChild(div);
     actorImgId++;
     actoresDeLaEscena.push(select.value);   
 }
 
+function enableOptions() {
+    var option;
+    for(i = 0; i < select.length; i++) {
+      option = select[i];
+      if (option.value == actoresDeLaEscena[actoresDeLaEscena.length-1]) {
+         option.removeAttribute("disabled");
+      }
+    }
+  }
+
 function removeActor() { //
     if(actorImgCount.length>0){
         var charsCard = document.getElementById("addCharacters");
         charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length-1]));
+        enableOptions();
         actorImgCount.pop();
-        actorImgId--; 
+        actoresDeLaEscena.pop();
+        actorImgId--;
     }
     
 }
