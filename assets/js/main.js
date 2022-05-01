@@ -99,7 +99,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function () {
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -113,7 +113,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function () {
+    botonmt.onclick = function() {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -128,7 +128,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function () {
+    bS.onclick = function() {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -215,7 +215,7 @@ function actorImg() {
     }
 }
 
-$.getJSON('assets/json/actores.json', function (data) {
+$.getJSON('assets/json/actores.json', function(data) {
     if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
@@ -268,7 +268,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -301,7 +301,7 @@ function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function (result) {
+        success: function(result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
@@ -314,23 +314,18 @@ function crearDropdown() {
 }
 
 function ajaxCall() {
-    //var data = new FormData();
-    //console.log(personajes.cues);
     var escenas = JSON.stringify(personajes.cues[0]);
     var array = [];
     for (var i = 0; i < personajes.cues.length; i++) {
         const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
         array.push(colasActivas);
     }
-    //console.log(array);
     var json = JSON.stringify(array);
-    // console.log(json);
-    //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function () {
-        console.log(this.response);
+    xhr.onload = function() {
+        //console.log(this.response);
     }
     xhr.send(json);
     return false;
