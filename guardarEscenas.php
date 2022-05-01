@@ -19,7 +19,7 @@ for ($i = 0; $i < sizeof($object); $i++) {
 }
 
 
-
+//Para pasar de float a formato vtt HH:MM:SS:MS
 function decimal_to_time($decimal) {
     $hours = floor($decimal / 60);
     $minutes = floor($decimal % 60);

@@ -104,7 +104,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function () {
+    botonpl.onclick = function() {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -118,7 +118,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function () {
+    botonmt.onclick = function() {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -133,7 +133,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function () {
+    bS.onclick = function() {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -211,10 +211,10 @@ function openFullscreen() {
     }
 }
 
-function addActor() { 
+function addActor() {
     var charsCard = document.getElementById("addCharacters");
     var div = document.createElement('div');
-    div.setAttribute("id", "imgActor"+actorImgId);
+    div.setAttribute("id", "imgActor" + actorImgId);
     div.setAttribute("class", "card");
     div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
     actorImgCount.push("imgActor"+actorImgId);
@@ -224,7 +224,7 @@ function addActor() {
     select.options[select.selectedIndex].setAttribute("disabled", "");
     charsCard.appendChild(div);
     actorImgId++;
-    actoresDeLaEscena.push(select.value);   
+    actoresDeLaEscena.push(select.value);
 }
 
 function enableOptions() {
@@ -238,7 +238,7 @@ function enableOptions() {
   }
 
 function removeActor() { //
-    if(actorImgCount.length>0){
+    if (actorImgCount.length > 0) {
         var charsCard = document.getElementById("addCharacters");
         charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length-1]));
         enableOptions();
@@ -246,10 +246,10 @@ function removeActor() { //
         actoresDeLaEscena.pop();
         actorImgId--;
     }
-    
+
 }
-$.getJSON('assets/json/actores.json', function (data) {
-    if (select){
+$.getJSON('assets/json/actores.json', function(data) {
+    if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
             var option = document.createElement("OPTION");
@@ -309,7 +309,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -339,7 +339,7 @@ function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function (result) {
+        success: function(result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
@@ -358,7 +358,7 @@ function infoActor(idIMDB) {
         "timeout": 0,
     };
 
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings).done(function(response) {
         //console.log(response);
         var infoP = document.getElementById("infoPersonaje");
         infoP.innerHTML = ' ';
@@ -375,23 +375,18 @@ function infoActor(idIMDB) {
 }
 
 function ajaxCall() {
-    //var data = new FormData();
-    //console.log(personajes.cues);
-    //var escenas = JSON.stringify(personajes.cues[0]);
+    var escenas = JSON.stringify(personajes.cues[0]);
     var array = [];
     for (var i = 0; i < personajes.cues.length; i++) {
         const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
         array.push(colasActivas);
     }
-    //console.log(array);
     var json = JSON.stringify(array);
-    // console.log(json);
-    //data.append("escenas", escenas);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function () {
-        console.log(this.response);
+    xhr.onload = function() {
+        //console.log(this.response);
     }
     xhr.send(json);
     return false;
