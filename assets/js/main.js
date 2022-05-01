@@ -293,7 +293,7 @@ function eliminarCola(id, idColaActual) {
 //Cambia de video con setAttribute
 function cambiarVideo(src) {
     video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
-    video.setAttribute("poster", "assets/img/"+src.split('.').slice(0, -1).join('.')+".png");
+    video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
     video.load();
 }
 
@@ -325,7 +325,7 @@ function crearDropdown() {
 function ajaxCall() {
     //var data = new FormData();
     //console.log(personajes.cues);
-    var escenas = JSON.stringify(personajes.cues[0]);
+    //var escenas = JSON.stringify(personajes.cues[0]);
     var array = [];
     for (var i = 0; i < personajes.cues.length; i++) {
         const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
