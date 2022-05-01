@@ -211,20 +211,48 @@ function openFullscreen() {
     }
 }
 
+function selectOtherOption() {
+    var option;
+    for(i = 0; i < select.length; i++) {
+        option = select[i];
+        option.selected = false;
+      }
+    for(i = 0; i < select.length; i++) {
+      option = select[i];
+      if (!option.disabled) {
+         option.selected = true;
+         //selectedActor = selectedActor = "assets/" + imgJson[i+1];
+      }
+    }
+    actorImg();
+  }
+
+function checkOptions() {
+    var option;
+    for(i = 0; i < select.length; i++) {
+      option = select[i];
+      if (!option.disabled) {
+         return true;
+      }
+      return false;
+    }
+  }
+
 function addActor() {
-    var charsCard = document.getElementById("addCharacters");
-    var div = document.createElement('div');
-    div.setAttribute("id", "imgActor" + actorImgId);
-    div.setAttribute("class", "card");
-    div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
-    actorImgCount.push("imgActor"+actorImgId);
-    //document.querySelector('div.selectorschar option[value='+select.value+']').setAttribute("disabled", "");
-        //setAttribute("disabled", "");
-        //persJson imgJson 
-    select.options[select.selectedIndex].setAttribute("disabled", "");
-    charsCard.appendChild(div);
-    actorImgId++;
-    actoresDeLaEscena.push(select.value);
+    if(checkOptions())
+    {
+        var charsCard = document.getElementById("addCharacters");
+        var div = document.createElement('div');
+        div.setAttribute("id", "imgActor" + actorImgId);
+        div.setAttribute("class", "card");
+        div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
+        actorImgCount.push("imgActor"+actorImgId);
+        select.options[select.selectedIndex].setAttribute("disabled", "");
+        actoresDeLaEscena.push(select.value);
+        selectOtherOption();
+        charsCard.appendChild(div);
+        actorImgId++;
+    }
 }
 
 function enableOptions() {
@@ -245,6 +273,7 @@ function removeActor() { //
         actorImgCount.pop();
         actoresDeLaEscena.pop();
         actorImgId--;
+        selectOtherOption();
     }
 
 }
