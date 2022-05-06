@@ -375,3 +375,7 @@ function ajaxCall() {
     xhr.send(json);
     return false;
 }
+
+function masEscenas() {
+
+}
