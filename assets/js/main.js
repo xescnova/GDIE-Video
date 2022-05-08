@@ -449,6 +449,7 @@ function masEscenas() {
                 alert("No se pueden solapar escenas");
                 return false;
             }
+            console.log(actoresDeLaEscena);
         }
         alert("Todo correcto");
         console.log(actoresDeLaEscena);
