@@ -28,9 +28,17 @@ var personajes = tracks[1];
 var actorImgId = 0;
 var actorImgCount = [];
 var selectedActor;
-var actoresDeLaEscena = []; // Personajes que se guardan en la escena
+// Variables al guardar la escena
+var actoresDeLaEscena = []; // Actor que se guardan en la escena.
+var imgDelActor = []; // Imagenes actor que se guardan en la escena. characterName
+var urlDelActor = []; // Url actor que se guardan en la escena.
+var personajeDelActor = []; // Personaje actor que se guardan en la escena.
+//
+// Variables al cargar el editor
 const persJson = [];
 const imgJson = [];
+const urlJson = [];
+const charJson = [];
 personajes.mode = "showing";
 escenas.mode = "hidden";
 
@@ -238,6 +246,36 @@ function checkOptions() {
     }
 }
 
+function findImg(sel)
+{
+    for (var i = 0; i < persJson.length; i++) {
+        if (persJson[i].Nombre==sel)
+        {
+            return persJson[i].Imagen;
+        }
+    }
+}
+
+function findUrl(sel)
+{
+    for (var i = 0; i < persJson.length; i++) {
+        if (persJson[i].Nombre==sel)
+        {
+            return persJson[i].URL;
+        }
+    }
+}
+
+function findCharacter(sel)
+{
+    for (var i = 0; i < persJson.length; i++) {
+        if (persJson[i].Nombre==sel)
+        {
+            return persJson[i].Personaje;
+        }
+    }
+}
+
 function addActor() {
     if (checkOptions()) {
         var charsCard = document.getElementById("addCharacters");
@@ -247,7 +285,12 @@ function addActor() {
         div.innerHTML = '<img id="img' + actorImgId + '" class="editor-img" src=' + selectedActor + ' width="125px">';
         actorImgCount.push("imgActor" + actorImgId);
         select.options[select.selectedIndex].setAttribute("disabled", "");
+        // Añadimos datos del actor
         actoresDeLaEscena.push(select.value);
+        imgDelActor.push(findImg(select.value));
+        urlDelActor.push(findUrl(select.value));
+        personajeDelActor.push(findCharacter(select.value));
+        // Fin
         selectOtherOption();
         charsCard.appendChild(div);
         actorImgId++;
@@ -271,6 +314,9 @@ function removeActor() { //
         enableOptions();
         actorImgCount.pop();
         actoresDeLaEscena.pop();
+        imgDelActor.pop();
+        urlDelActor.pop();
+        personajeDelActor.pop();
         actorImgId--;
         selectOtherOption();
     }
@@ -286,6 +332,8 @@ $.getJSON('assets/json/actores.json', function(data) {
             select.insertBefore(option, select.lastChild);
             persJson.push(arr[i].Nombre);
             imgJson.push(arr[i].Imagen);
+            urlJson.push(arr[i].URL);
+            charJson.push(arr[i].Personaje);
             selectedActor = "assets/" + imgJson[0];
         }
     }
@@ -436,7 +484,6 @@ function masEscenas() {
     var b = endTime.split(':'); // split it at the colons
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var endSeconds = (b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
-
     if (document.body.contains(document.getElementById('nuevasEscenasVideo'))) {
         let cues = personajes.cues;
         //Mira si la nueva escena no se solapa con ninguna ya introducida
@@ -453,6 +500,10 @@ function masEscenas() {
         }
         alert("Todo correcto");
         console.log(actoresDeLaEscena);
+        console.log(actoresDeLaEscena);
+        console.log(imgDelActor);
+        console.log(urlDelActor);
+        console.log(personajeDelActor);
     }
 
 
