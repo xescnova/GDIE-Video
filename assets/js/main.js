@@ -484,7 +484,6 @@ function masEscenas() {
     var b = endTime.split(':'); // split it at the colons
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var endSeconds = (b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
-
     if (document.body.contains(document.getElementById('nuevasEscenasVideo'))) {
         let cues = personajes.cues;
         //Mira si la nueva escena no se solapa con ninguna ya introducida
@@ -500,6 +499,10 @@ function masEscenas() {
         }
         alert("Todo correcto");
         console.log(actoresDeLaEscena);
+        console.log(actoresDeLaEscena);
+        console.log(imgDelActor);
+        console.log(urlDelActor);
+        console.log(personajeDelActor);
     }
 
 
