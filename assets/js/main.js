@@ -213,40 +213,39 @@ function openFullscreen() {
 
 function selectOtherOption() {
     var option;
-    for(i = 0; i < select.length; i++) {
+    for (i = 0; i < select.length; i++) {
         option = select[i];
         option.selected = false;
-      }
-    for(i = 0; i < select.length; i++) {
-      option = select[i];
-      if (!option.disabled) {
-         option.selected = true;
-         //selectedActor = selectedActor = "assets/" + imgJson[i+1];
-      }
+    }
+    for (i = 0; i < select.length; i++) {
+        option = select[i];
+        if (!option.disabled) {
+            option.selected = true;
+            //selectedActor = selectedActor = "assets/" + imgJson[i+1];
+        }
     }
     actorImg();
-  }
+}
 
 function checkOptions() {
     var option;
-    for(i = 0; i < select.length; i++) {
-      option = select[i];
-      if (!option.disabled) {
-         return true;
-      }
-      return false;
+    for (i = 0; i < select.length; i++) {
+        option = select[i];
+        if (!option.disabled) {
+            return true;
+        }
+        return false;
     }
-  }
+}
 
 function addActor() {
-    if(checkOptions())
-    {
+    if (checkOptions()) {
         var charsCard = document.getElementById("addCharacters");
         var div = document.createElement('div');
         div.setAttribute("id", "imgActor" + actorImgId);
         div.setAttribute("class", "card");
-        div.innerHTML = '<img id="img'+actorImgId+'" class="editor-img" src='+selectedActor+' width="125px">';
-        actorImgCount.push("imgActor"+actorImgId);
+        div.innerHTML = '<img id="img' + actorImgId + '" class="editor-img" src=' + selectedActor + ' width="125px">';
+        actorImgCount.push("imgActor" + actorImgId);
         select.options[select.selectedIndex].setAttribute("disabled", "");
         actoresDeLaEscena.push(select.value);
         selectOtherOption();
@@ -257,18 +256,18 @@ function addActor() {
 
 function enableOptions() {
     var option;
-    for(i = 0; i < select.length; i++) {
-      option = select[i];
-      if (option.value == actoresDeLaEscena[actoresDeLaEscena.length-1]) {
-         option.removeAttribute("disabled");
-      }
+    for (i = 0; i < select.length; i++) {
+        option = select[i];
+        if (option.value == actoresDeLaEscena[actoresDeLaEscena.length - 1]) {
+            option.removeAttribute("disabled");
+        }
     }
-  }
+}
 
 function removeActor() { //
     if (actorImgCount.length > 0) {
         var charsCard = document.getElementById("addCharacters");
-        charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length-1]));
+        charsCard.removeChild(document.getElementById(actorImgCount[actorImgCount.length - 1]));
         enableOptions();
         actorImgCount.pop();
         actoresDeLaEscena.pop();
@@ -421,6 +420,39 @@ function ajaxCall() {
     return false;
 }
 
+
+
 function masEscenas() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tituloEscena = urlParams.get('tituloEscena');
+    const startTime = urlParams.get('startEscena');
+    const endTime = urlParams.get('endEscena');
+
+
+    var a = startTime.split(':'); // split it at the colons
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var startSeconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+
+    var b = endTime.split(':'); // split it at the colons
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var endSeconds = (b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
+
+    if (document.body.contains(document.getElementById('nuevasEscenasVideo'))) {
+        let cues = personajes.cues;
+        //Mira si la nueva escena no se solapa con ninguna ya introducida
+        for (let i = 0; i < cues.length; i++) {
+            if (endSeconds > cues[i].startTime && endSeconds < cues[i].endTime) {
+                alert("No se pueden solapar escenas");
+                return false;
+            }
+            if (startSeconds > cues[i].startTime && startSeconds < cues[i].endTime) {
+                alert("No se pueden solapar escenas");
+                return false;
+            }
+        }
+        alert("Todo correcto");
+        console.log(actoresDeLaEscena);
+    }
+
 
 }

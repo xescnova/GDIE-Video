@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="portfolio-info" style="margin-top:10px">
                             <h3>Upload video</h3>
                             <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
@@ -172,39 +172,51 @@
 
                         <div class="row gy-4">
                             <div class="portfolio-info">
-                                <h3> Edit video (metadata) </h3>
-                                <h4> Title </h4>
-                                <input type="text" id="title" placeholder="Video title" name="fname" >
-                                <br><br>
-                                <h4> Time </h4>
-                                <button class="btn-editor" id="sel-tiempo" onclick="getCurrentTime()">Start time</button>
-                                <form enctype="multipart/form-data" action="subirArchivos.php" method="POST">
-                                    <input type="hidden" name="metadatos" value="512000" />
+                                <form name="listarEscenasNuevas" onsubmit="masEscenas()">
+                                    <h3> Edit video (metadata) </h3>
+                                    <h4> Title </h4>
+                                    <input type="text" id="title" placeholder="Video title" name="tituloEscena">
+                                    <br><br>
+                                    <h4> Time </h4>
+                                    <button type="button" class="btn-editor" id="sel-tiempo" onclick="getCurrentTime()">Start time</button>
+
                                     <div>
-                                        <input type="text" id="startTime" placeholder="Start time" name="fname" disabled>
-                                        <input type="text" id="endTime" placeholder="End time" name="fname" disabled>
+                                        <input type="text" id="startTime" placeholder="Start time" name="startEscena">
+                                        <input type="text" id="endTime" placeholder="End time" name="endEscena">
                                     </div>
                                     <br>
-                                        <div class="col-4">
-                                            <h4> Character </h4>
-                                        <div id="selectorschar"> <!-- onchange="doSomething();" onclick="botonMuted()"-->
+                                    <div class="col-4">
+                                        <h4> Character </h4>
+                                        <div id="selectorschar">
+                                            <!-- onchange="doSomething();" onclick="botonMuted()"-->
                                             <select name="character" class="selector-actor" onchange="actorImg()" id="actorsAvailable"></select>
                                         </div>
                                         <div class="masymenos">
-                                            <button id="moreactors"  onclick="removeActor()" class="add-actor"  type="button">-</button>
-                                            <button id="moreactors"  onclick="addActor()" class="add-actor"  type="button">+</button>
+                                            <button id="moreactors" onclick="removeActor()" class="add-actor" type="button">-</button>
+                                            <button id="moreactors" onclick="addActor()" class="add-actor" type="button">+</button>
                                         </div>
                                         <div class="cards-editor" id="addCharacters">
                                         </div>
                                         <br><br>
-                                        <div class="uploadbtn"><input type="submit" value="Upload" /></div>
-                                        </div>
+
+                                    </div>
+                                    <div class="uploadbtn"><input type="submit" value="Upload" /></div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="container">
                         <div class="col-md">
+                            <div class="" id="nuevasEscenasVideo">
+                                <h3>Nuevas escenas</h3>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="container">
+                        <div class="col-md">
+                            <h3>Escenas</h3>
                             <div class="" id="escenasVideo">
 
                             </div>
