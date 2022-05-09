@@ -110,9 +110,9 @@
                 <div class="row gy-4">
                     <div class="col-lg-8">
                         <div class="c-video">
-                            <video class="video" id="videoMrRobot" onclick="playvid()" playsinline
+                            <video data-dashjs-player src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd" class="video" id="videoMrRobot" onclick="playvid()" playsinline
                                 poster="assets/img/MrRobot.png">
-                                <source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/videoGDIE.mkv">
+                                <!--<source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd">-->
                                 <track id="idSubtitulos" kind="subtitles" src="subtENG.vtt" srclang="en" label="">
                                 <track id="idMetadados" kind="metadata" src="escenas.vtt" srclang="no"
                                     label="Metadatos">
@@ -204,6 +204,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js "></script>
+    <script src="assets/js/dash.all.min.js"></script>
 </body>
 
 </html>

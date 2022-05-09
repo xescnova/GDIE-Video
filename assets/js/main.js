@@ -248,24 +248,24 @@ function checkOptions() {
 
 function findImg(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre == sel) {
-            return persJson[i].Imagen;
+        if (persJson[i] == sel) {
+            return imgJson[i];
         }
     }
 }
 
 function findUrl(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre == sel) {
-            return persJson[i].URL;
+        if (persJson[i] == sel) {
+            return urlJson[i];
         }
     }
 }
 
 function findCharacter(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre == sel) {
-            return persJson[i].Personaje;
+        if (persJson[i] == sel) {
+            return charJson[i];
         }
     }
 }
@@ -491,6 +491,7 @@ function masEscenas() {
                 alert("No se pueden solapar escenas");
                 return false;
             }
+            console.log(actoresDeLaEscena);
         }
         //alert("Todo correcto");
         console.log(actoresDeLaEscena);
