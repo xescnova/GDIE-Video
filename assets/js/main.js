@@ -246,31 +246,25 @@ function checkOptions() {
     }
 }
 
-function findImg(sel)
-{
+function findImg(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
-        {
+        if (persJson[i].Nombre == sel) {
             return persJson[i].Imagen;
         }
     }
 }
 
-function findUrl(sel)
-{
+function findUrl(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
-        {
+        if (persJson[i].Nombre == sel) {
             return persJson[i].URL;
         }
     }
 }
 
-function findCharacter(sel)
-{
+function findCharacter(sel) {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
-        {
+        if (persJson[i].Nombre == sel) {
             return persJson[i].Personaje;
         }
     }
@@ -471,10 +465,11 @@ function ajaxCall() {
 
 
 function masEscenas() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tituloEscena = urlParams.get('tituloEscena');
-    const startTime = urlParams.get('startEscena');
-    const endTime = urlParams.get('endEscena');
+
+    // const urlParams = new URLSearchParams(window.location.search);
+    const tituloEscena = document.getElementById('title').value;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
 
 
     var a = startTime.split(':'); // split it at the colons
@@ -497,13 +492,15 @@ function masEscenas() {
                 return false;
             }
         }
-        alert("Todo correcto");
-        console.log(actoresDeLaEscena);
+        //alert("Todo correcto");
         console.log(actoresDeLaEscena);
         console.log(imgDelActor);
         console.log(urlDelActor);
         console.log(personajeDelActor);
+
+
     }
+
 
 
 }
