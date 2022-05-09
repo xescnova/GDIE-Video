@@ -491,13 +491,15 @@ function masEscenas() {
                 alert("No se pueden solapar escenas");
                 return false;
             }
-            console.log(actoresDeLaEscena);
+            //console.log(actoresDeLaEscena);
         }
         //alert("Todo correcto");
-        console.log(actoresDeLaEscena);
-        console.log(imgDelActor);
-        console.log(urlDelActor);
-        console.log(personajeDelActor);
+        var texto = '[\n        {\n        "Nombre": "' + actoresDeLaEscena[0] + '",\n        "Personaje": "' + personajeDelActor[0] + '",\n        "URL":"' + urlDelActor[0] + '",\n        "Imagen":"' + imgDelActor[0] + '"\n         }\n]';
+        for (let i = 0; i < actoresDeLaEscena.length; i++) {
+
+        }
+        console.log(texto);
+
 
 
     }
