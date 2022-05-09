@@ -249,9 +249,9 @@ function checkOptions() {
 function findImg(sel)
 {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
+        if (persJson[i]==sel)
         {
-            return persJson[i].Imagen;
+            return imgJson[i];
         }
     }
 }
@@ -259,9 +259,9 @@ function findImg(sel)
 function findUrl(sel)
 {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
+        if (persJson[i]==sel)
         {
-            return persJson[i].URL;
+            return urlJson[i];
         }
     }
 }
@@ -269,9 +269,9 @@ function findUrl(sel)
 function findCharacter(sel)
 {
     for (var i = 0; i < persJson.length; i++) {
-        if (persJson[i].Nombre==sel)
+        if (persJson[i]==sel)
         {
-            return persJson[i].Personaje;
+            return charJson[i];
         }
     }
 }
