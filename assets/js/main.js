@@ -374,6 +374,8 @@ function listarEscenas() {
     }
 }
 
+
+
 //Elimina una escena, tanto el div como el la cola del vídeo.
 function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
@@ -479,7 +481,7 @@ function masEscenas() {
     var b = endTime.split(':'); // split it at the colons
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var endSeconds = (b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
-    if (document.body.contains(document.getElementById('nuevasEscenasVideo'))) {
+    if (document.body.contains(document.getElementById('escenasVideo'))) {
         let cues = personajes.cues;
         //Mira si la nueva escena no se solapa con ninguna ya introducida
         for (let i = 0; i < cues.length; i++) {
@@ -494,13 +496,21 @@ function masEscenas() {
             //console.log(actoresDeLaEscena);
         }
         //alert("Todo correcto");
-        var texto = '[\n        {\n        "Nombre": "' + actoresDeLaEscena[0] + '",\n        "Personaje": "' + personajeDelActor[0] + '",\n        "URL":"' + urlDelActor[0] + '",\n        "Imagen":"' + imgDelActor[0] + '"\n         }\n]';
+        var texto = '[';
         for (let i = 0; i < actoresDeLaEscena.length; i++) {
-
+            texto = texto + '\n        {\n        "Nombre": "' + actoresDeLaEscena[i] + '",\n        "Personaje": "' + personajeDelActor[i] + '",\n        "URL":"' + urlDelActor[i] + '",\n        "Imagen":"' + imgDelActor[i] + '"\n         }';
+            if (i + 1 < actoresDeLaEscena.length) {
+                texto = texto + ',';
+            }
         }
-        console.log(texto);
+        texto = texto + '\n]';
+        var x = new VTTCue(startSeconds, endSeconds, texto);
+        x.id = tituloEscena;
+        personajes.addCue(x);
 
-
+        console.log(personajes.cues);
+        $("#escenasVideo").empty();
+        listarEscenas();
 
     }
 
