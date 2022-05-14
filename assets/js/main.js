@@ -407,7 +407,10 @@ function eliminarCola(id, idColaActual) {
 //Cambia de video con setAttribute
 function cambiarVideo(src) {
     video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
-    video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
+    //video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
+    filename = src.split('.').slice(0, -1).join('.');
+    document.getElementById("idMetadados").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + ".vtt");
+    $("#escenasVideo").empty();
     video.load();
 }
 

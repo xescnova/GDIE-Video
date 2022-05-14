@@ -21,15 +21,15 @@ table td{ padding:5px;}
 <div class="main">
 <h1>Subir archivo con PHP:</h1>
 <?php
-$directorio = 'subirVideos/';
+$directorio = 'video/';
 $subir_archivo = $directorio.basename($_FILES['subir_archivo']['name']);
 if (move_uploaded_file($_FILES['subir_archivo']['tmp_name'], $subir_archivo)) {
     //print_r($subir_archivo);
     $nombre = pathinfo($subir_archivo); 
     $file = $nombre['filename'].".vtt";
     //echo $file;
-    $fp = fopen("subirVideos/".$file, "x+"); //crea archivo .vtt con el nombre del archivo
-    file_put_contents("subirVideos/".$file, "WEBVTT"); //escribe la cabecera del archivo VTT
+    $fp = fopen("video/".$file, "x+"); //crea archivo .vtt con el nombre del archivo
+    file_put_contents("video/".$file, "WEBVTT"); //escribe la cabecera del archivo VTT
     echo "El archivo es válido y se cargó correctamente.<br><br>";
     echo"<a href='".$subir_archivo."' target='_blank'><img src='".$subir_archivo."' width='150'></a>";
     } else {
