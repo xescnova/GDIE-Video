@@ -448,7 +448,7 @@ function infoActor(idIMDB) {
 
 function ajaxCall() {
     var escenas = JSON.stringify(personajes.cues[0]);
-    var array = [];
+    var array = [videoMrRobot.children[2].src];
     for (var i = 0; i < personajes.cues.length; i++) {
         const colasActivas = { id: personajes.cues[i].id, ini: personajes.cues[i].startTime, fin: personajes.cues[i].endTime, texto: personajes.cues[i].text }
         array.push(colasActivas);

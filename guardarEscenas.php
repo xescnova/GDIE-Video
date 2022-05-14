@@ -2,22 +2,30 @@
 $requestPayload = file_get_contents("php://input");
 $object= json_decode($requestPayload,true);
 
-var_dump($object);
-$fp = fopen("escenasP.vtt", "x+"); //crea archivo .vtt con el nombre del archivo
-file_put_contents("escenasP.vtt", "WEBVTT"); //escribe la cabecera del archivo VTT
-//file_put_contents("escenasP.vtt", object[0].id,FILE_APPEND); //escribe la cabecera del archivo VTT
+//var_dump($object);
 
-for ($i = 0; $i < sizeof($object); $i++) {
-    file_put_contents("escenasP.vtt","\n",FILE_APPEND);
-    file_put_contents("escenasP.vtt",$object[$i]['id'],FILE_APPEND);
-    file_put_contents("escenasP.vtt","\n",FILE_APPEND);  
-    file_put_contents("escenasP.vtt",decimal_to_time($object[$i]['ini']),FILE_APPEND); 
-    file_put_contents("escenasP.vtt"," ---> ",FILE_APPEND);
-    file_put_contents("escenasP.vtt",decimal_to_time($object[$i]['fin']),FILE_APPEND); 
-    file_put_contents("escenasP.vtt","\n",FILE_APPEND); 
-    file_put_contents("escenasP.vtt",$object[$i]['texto'],FILE_APPEND); 
+//$escenas = '"'.$object[0].'"';
+$escenas = '"'.$object[0];
+$escenas = basename($escenas);
+print($escenas);
+$fp = fopen($escenas, "a+"); //crea archivo .vtt con el nombre del archivo
+file_put_contents($escenas, "WEBVTT"); //escribe la cabecera del archivo VTT
+//file_put_contents($escenas, escenas.id,FILE_APPEND); //escribe la cabecera del archivo VTT
+
+
+for ($i = 1; $i < sizeof($object); $i++) {
+    file_put_contents($escenas,"\n",FILE_APPEND);
+    file_put_contents($escenas,$object[$i]['id'],FILE_APPEND);
+    file_put_contents($escenas,"\n",FILE_APPEND);  
+    file_put_contents($escenas,decimal_to_time($object[$i]['ini']),FILE_APPEND); 
+    file_put_contents($escenas," ---> ",FILE_APPEND);
+    file_put_contents($escenas,decimal_to_time($object[$i]['fin']),FILE_APPEND); 
+    file_put_contents($escenas,"\n",FILE_APPEND); 
+    file_put_contents($escenas,$object[$i]['texto'],FILE_APPEND); 
+    file_put_contents($escenas,"\n\n",FILE_APPEND); 
 }
 
+//console.log(videoMrRobot.children[2].src);
 
 //Para pasar de float a formato vtt HH:MM:SS:MS
 function decimal_to_time($decimal) {
