@@ -1,7 +1,7 @@
 <?php
 $arrFiles = array();
-//$handle = opendir("video/");
-$handle = opendir("assets/img");
+$handle = opendir("video/");
+//$handle = opendir("assets/img");
 
 if ($handle) {
     while (($entry = readdir($handle)) !== FALSE) {

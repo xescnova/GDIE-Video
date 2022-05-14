@@ -4,6 +4,8 @@ $object= json_decode($requestPayload,true);
 
 //var_dump($object);
 
+
+//FALTA PONER QUE LA RUTA SEA /videos para que las escenas la lea bien
 //$escenas = '"'.$object[0].'"';
 $escenas = '"'.$object[0];
 $escenas = basename($escenas);
