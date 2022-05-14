@@ -198,6 +198,7 @@ function getCurrentTime() {
             tInicio.value = tiempo;
         }
     }
+    debugger;
 }
 
 function plusTen() {
@@ -216,6 +217,18 @@ function openFullscreen() {
         video.webkitRequestFullscreen();
     } else if (video.msRequestFullscreen) { /* IE11 */
         video.msRequestFullscreen();
+    }
+}
+
+
+function hideQualityOptions(){
+    if(document.getElementById("qualityOptions").hidden)
+    {
+        document.getElementById("qualityOptions").hidden = false;
+    }
+    else
+    {
+        document.getElementById("qualityOptions").hidden = true;
     }
 }
 
