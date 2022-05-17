@@ -56,7 +56,7 @@ timeVid.addEventListener('input', moveBar);
 video.addEventListener('play', setDuration);
 
 
-function hlsFunction() {
+async function hlsFunction() {
     var vidPlayer = document.getElementById("videoMrRobot");
     if (Hls.isSupported()) {
         hls = new Hls();
@@ -74,8 +74,24 @@ function hlsFunction() {
                 forced: true,
                 onChange: (e) => qualityUpdate(e),
             }
-           
+            // Añadir opciones de calidad al player
+            var code = "";
+            var qualAct;
+            for (i = 1; i < defaultOptions.quality.options.length; i++) {
+                quals.push(defaultOptions.quality.options[i]);
+            }
+            //debugger;
+            for (x = quals.length-1; x >= 0; x--) {
+                qualAct = quals[x];
+                code = code +'<button id="optionQuality'+qualAct+'" type="button" onClick="qualityUpdate(' +qualAct+ ',[0,' +quals+ '])">'+qualAct+'p</button><br>';
+            }
+            code = code +'<button id="optionQuality0" type="button" onClick="qualityUpdate('+0+',[0,' +quals+ '])" >auto</button><br>';
+            timeVid.max = Math.round(video.duration);
+            var qVid = document.getElementById("qualityOptions");
+            qVid.innerHTML = code;
+
         });
+        
 
     } else {
         vidPlayer.src = "https://alumnes-ltim.uib.es/gdie2206/video/videoGDIE.mkv";
@@ -83,6 +99,25 @@ function hlsFunction() {
     }
 };
 
+function switchQuality(qualities,qual)
+{
+    var qbtn;
+    //debugger;
+    for (i=0;i<qualities.length;i++)
+    {
+        qbtn = document.getElementById("optionQuality"+qualities[i]);
+        if(qual==qualities[i])
+        {
+            qbtn.style.color = "rgb(244, 255, 120)";
+            qbtn.style.backgroundColor = "rgb(21, 21, 21)";
+        }
+        else
+        {
+            qbtn.style.color = "rgb(255, 255, 255)";
+            qbtn.style.backgroundColor = "rgb(82, 82, 82)";
+        }
+    }
+}
 
 const videoWorks = !!document.createElement('video').canPlayType;
 hlsFunction();
@@ -94,13 +129,16 @@ if (videoWorks) {
     //setQuality();
 }
 
-function qualityUpdate(newQuality) {
+function qualityUpdate(newQuality,qualities) {
+    switchQuality(qualities,newQuality);
     if (newQuality === 0) {
         window.hls.currentLevel = -1; //Enable AUTO quality if option.value = 0
+        defaultOptions.quality.onChange = (e) => qualityUpdate(e,qualities);
     } else {
         window.hls.levels.forEach((level, levelIndex) => {
             if (level.height === newQuality) {
                 window.hls.currentLevel = levelIndex;
+                defaultOptions.quality.onChange = (e) => null;
             }
         });
     }
@@ -122,15 +160,6 @@ function playvid() {
 function setDuration() {
     timeVid.max = Math.round(video.duration);
 }
-
-function setQuality() {
-    document.getElementById("qualityOptions");
-    for (i = 1; i < defaultOptions.quality.options.length - 1; i++) {
-        quals.push(defaultOptions.quality.options[i]);
-    }
-    timeVid.max = Math.round(video.duration);
-}
-//qualityOptions
 
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);

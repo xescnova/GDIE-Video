@@ -1373,6 +1373,16 @@ section {
     background-color: rgb(183, 183, 183);
 }
 
+.videoQualityOptionSelected button{
+    color: rgb(244, 255, 120);
+    background-color: rgb(21, 21, 21);
+}
+
+.videoQualityOptionSelected button:hover{
+    color: rgb(240, 255, 80);
+    background-color: rgb(59, 59, 59);
+}
+
 .playbutton {
     padding: 6px;
     filter:#FFFFFF;
