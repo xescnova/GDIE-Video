@@ -115,14 +115,23 @@
                                     label="Metadatos">
                             </video>
 
+                            <div class="videoQuality" onclick="hideQualityOptions()">
+                                <button id="botonQuality" type="button"><img id="imgQuality"
+                                        src="assets/img/quality.png" width="18px"></button>
+                            </div>
+
+                            <div class="videoQualityOption" id="qualityOptions" hidden>
+                            </div>
+
+
                             <div class="video-controls">
                                 <div class="slideTime">
                                     <input type="range" id="timebar" class="sliderBarTime" min="0" max="100" value="0">
                                 </div>
+
                                 <!--
                                 <div class="bar-back">
                                     <div class="bar-progress" id="progressBar"></div>
-
                                 </div>
                                 -->
                                 <!-- Boton Play -->
@@ -198,8 +207,10 @@
             class="bi bi-arrow-up-short "></i></a>
 
     <!-- Template Main JS File -->
+    <script src="assets/js/hls.js"></script>
     <script src="assets/js/main.js "></script>
-    <script src="assets/js/dash.all.min.js"></script>
+    <!-- <script src="assets/js/dash.all.min.js"></script> -->
+
 </body>
 
 </html>

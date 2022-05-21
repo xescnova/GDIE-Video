@@ -39,8 +39,12 @@ const persJson = [];
 const imgJson = [];
 const urlJson = [];
 const charJson = [];
+// Variables de calidad de video
+const defaultOptions = {};
+var quals = [];
 personajes.mode = "showing";
 escenas.mode = "hidden";
+var hls;
 
 
 video.addEventListener('loadedmetadata', initializeVideo);
@@ -51,11 +55,93 @@ video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
 video.addEventListener('play', setDuration);
 
+
+async function hlsFunction() {
+    var vidPlayer = document.getElementById("videoMrRobot");
+    if (Hls.isSupported()) {
+        hls = new Hls();
+        console.log("HLS");
+        hls.loadSource("https://alumnes-ltim.uib.es/gdie2206/video/manifest.m3u8");
+        hls.attachMedia(vidPlayer);
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+            const availableQualities = hls.levels.map((l) => l.height);
+            availableQualities.unshift(0);
+
+            // Añadir calidades a las opciones
+            defaultOptions.quality = {
+                default: 0,
+                options: availableQualities,
+                forced: true,
+                onChange: (e) => qualityUpdate(e),
+            }
+            // Añadir opciones de calidad al player
+            var code = "";
+            var qualAct;
+            for (i = 1; i < defaultOptions.quality.options.length; i++) {
+                quals.push(defaultOptions.quality.options[i]);
+            }
+            //debugger;
+            for (x = quals.length-1; x >= 0; x--) {
+                qualAct = quals[x];
+                code = code +'<button id="optionQuality'+qualAct+'" type="button" onClick="qualityUpdate(' +qualAct+ ',[0,' +quals+ '])">'+qualAct+'p</button><br>';
+            }
+            code = code +'<button id="optionQuality0" type="button" onClick="qualityUpdate('+0+',[0,' +quals+ '])" >auto</button><br>';
+            timeVid.max = Math.round(video.duration);
+            var qVid = document.getElementById("qualityOptions");
+            qVid.innerHTML = code;
+
+        });
+        
+
+    } else {
+        vidPlayer.src = "https://alumnes-ltim.uib.es/gdie2206/video/videoGDIE.mkv";
+        console.log("MP4");
+    }
+};
+
+function switchQuality(qualities,qual)
+{
+    var qbtn;
+    //debugger;
+    for (i=0;i<qualities.length;i++)
+    {
+        qbtn = document.getElementById("optionQuality"+qualities[i]);
+        if(qual==qualities[i])
+        {
+            qbtn.style.color = "rgb(244, 255, 120)";
+            qbtn.style.backgroundColor = "rgb(21, 21, 21)";
+        }
+        else
+        {
+            qbtn.style.color = "rgb(255, 255, 255)";
+            qbtn.style.backgroundColor = "rgb(82, 82, 82)";
+        }
+    }
+}
+
 const videoWorks = !!document.createElement('video').canPlayType;
+hlsFunction();
+console.log(defaultOptions.quality);
 if (videoWorks) {
     volumebar();
     timebar();
     video.muted = false;
+    //setQuality();
+}
+
+function qualityUpdate(newQuality,qualities) {
+    switchQuality(qualities,newQuality);
+    if (newQuality === 0) {
+        window.hls.currentLevel = -1; //Enable AUTO quality if option.value = 0
+        defaultOptions.quality.onChange = (e) => qualityUpdate(e,qualities);
+    } else {
+        window.hls.levels.forEach((level, levelIndex) => {
+            if (level.height === newQuality) {
+                window.hls.currentLevel = levelIndex;
+                defaultOptions.quality.onChange = (e) => null;
+            }
+        });
+    }
 }
 
 function playvid() {
@@ -112,7 +198,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -126,7 +212,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -141,7 +227,7 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
+    bS.onclick = function () {
         var esc = escenas.mode;
         console.log(esc);
         if (esc == "hidden") {
@@ -198,6 +284,7 @@ function getCurrentTime() {
             tInicio.value = tiempo;
         }
     }
+    debugger;
 }
 
 function plusTen() {
@@ -216,6 +303,16 @@ function openFullscreen() {
         video.webkitRequestFullscreen();
     } else if (video.msRequestFullscreen) { /* IE11 */
         video.msRequestFullscreen();
+    }
+}
+
+
+function hideQualityOptions() {
+    if (document.getElementById("qualityOptions").hidden) {
+        document.getElementById("qualityOptions").hidden = false;
+    }
+    else {
+        document.getElementById("qualityOptions").hidden = true;
     }
 }
 
@@ -316,7 +413,7 @@ function removeActor() { //
     }
 
 }
-$.getJSON('assets/json/actores.json', function(data) {
+$.getJSON('assets/json/actores.json', function (data) {
     if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
@@ -381,7 +478,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     console.log(idCola);
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -415,7 +512,7 @@ function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function(result) {
+        success: function (result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
@@ -434,7 +531,7 @@ function infoActor(idIMDB) {
         "timeout": 0,
     };
 
-    $.ajax(settings).done(function(response) {
+    $.ajax(settings).done(function (response) {
         //console.log(response);
         var infoP = document.getElementById("infoPersonaje");
         infoP.innerHTML = ' ';
@@ -461,7 +558,7 @@ function ajaxCall() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function() {
+    xhr.onload = function () {
         //console.log(this.response);
     }
     xhr.send(json);
