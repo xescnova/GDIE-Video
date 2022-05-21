@@ -80,7 +80,6 @@ async function hlsFunction() {
             for (i = 1; i < defaultOptions.quality.options.length; i++) {
                 quals.push(defaultOptions.quality.options[i]);
             }
-            //debugger;
             for (x = quals.length-1; x >= 0; x--) {
                 qualAct = quals[x];
                 code = code +'<button id="optionQuality'+qualAct+'" type="button" onClick="qualityUpdate(' +qualAct+ ',[0,' +quals+ '])">'+qualAct+'p</button><br>';
@@ -102,7 +101,6 @@ async function hlsFunction() {
 function switchQuality(qualities,qual)
 {
     var qbtn;
-    //debugger;
     for (i=0;i<qualities.length;i++)
     {
         qbtn = document.getElementById("optionQuality"+qualities[i]);
@@ -284,7 +282,6 @@ function getCurrentTime() {
             tInicio.value = tiempo;
         }
     }
-    debugger;
 }
 
 function plusTen() {
@@ -541,7 +538,7 @@ function infoActor(idIMDB) {
         for (var i = 0; i < arraypelis.length; i++) {
             conocido.push(arraypelis[i].fullTitle + "");
         }
-        div.innerHTML = '<img src="assets/' + response["image"] + '" height="150px" width="150px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><h2>' + response["name"] + '</h2></p><h4>Biografía:</h4><p class="card-text" style="text-align: center">' + response["summary"] + '</p><h4>Conocido por:</h4><p class="card-text" style="text-align: center">' + conocido.toString() + '</p></div>';
+        div.innerHTML = '<img src="' + response["image"] + '" height="150px" width="110px"><div class="card-block px-2"><p class="card-title" style="text-align: center"><h2>' + response["name"] + '</h2></p><h4>Biografía:</h4><p class="card-text" style="text-align: center">' + response["summary"] + '</p><h4>Conocido por:</h4><p class="card-text" style="text-align: center">' + conocido.toString() + '</p></div>';
         infoP.appendChild(div.cloneNode(true));
     });
 }
