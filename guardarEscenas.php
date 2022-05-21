@@ -9,11 +9,11 @@ $object= json_decode($requestPayload,true);
 //$escenas = '"'.$object[0].'"';
 $escenas = '"'.$object[0];
 $escenas = basename($escenas);
-print($escenas);
 $fp = fopen($escenas, "a+"); //crea archivo .vtt con el nombre del archivo
 file_put_contents($escenas, "WEBVTT"); //escribe la cabecera del archivo VTT
 //file_put_contents($escenas, escenas.id,FILE_APPEND); //escribe la cabecera del archivo VTT
 
+print($escenas);
 
 for ($i = 1; $i < sizeof($object); $i++) {
     file_put_contents($escenas,"\n",FILE_APPEND);
