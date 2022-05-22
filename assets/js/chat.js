@@ -35,6 +35,8 @@ window.onload = (function() {
             }
 
             console.log('ID: ' + peer.id);
+            var idCon = document.getElementById("connID");
+            idCon.innerHTML='ID: '+ peer.id;
         });
         peer.on('connection', function(c) {
             // Disallow incoming connections
