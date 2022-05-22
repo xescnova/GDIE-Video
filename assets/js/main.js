@@ -46,7 +46,6 @@ personajes.mode = "showing";
 escenas.mode = "hidden";
 var hls;
 
-
 video.addEventListener('loadedmetadata', initializeVideo);
 video.addEventListener('play', setDuration);
 video.addEventListener('timeupdate', updateTimeElapsed);
