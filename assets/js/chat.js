@@ -36,14 +36,21 @@ window.onload = (function() {
 
             console.log('ID: ' + peer.id);
             var idCon = document.getElementById("connID");
-            idCon.innerHTML='ID: '+ peer.id;
+            idCon.innerHTML = 'ID: ' + peer.id;
         });
         peer.on('connection', function(c) {
-            // Disallow incoming connections
-            c.on('open', function() {
-                c.send("Sender does not accept incoming connections");
-                setTimeout(function() { c.close(); }, 500);
-            });
+            // Allow only a single connection	
+            if (conn && conn.open) {
+                c.on('open', function() {
+                    c.send("Already connected to another client");
+                    setTimeout(function() { c.close(); }, 500);
+                });
+                return;
+            }
+            conn = c;
+            console.log("Connected to: " + conn.peer);
+            status.innerHTML = "Connected";
+            ready();
         });
         peer.on('disconnected', function() {
             status.innerHTML = "Connection lost. Please reconnect";
@@ -97,6 +104,38 @@ window.onload = (function() {
         });
         conn.on('close', function() {
             status.innerHTML = "Connection closed";
+        });
+    };
+
+    function ready() {
+        conn.on('data', function(data) {
+            console.log("Data recieved");
+            var cueString = "<span class=\"cueMsg\">Cue: </span>";
+            switch (data) {
+                case 'Go':
+                    go();
+                    addMessage(cueString + data);
+                    break;
+                case 'Fade':
+                    fade();
+                    addMessage(cueString + data);
+                    break;
+                case 'Off':
+                    off();
+                    addMessage(cueString + data);
+                    break;
+                case 'Reset':
+                    reset();
+                    addMessage(cueString + data);
+                    break;
+                default:
+                    addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
+                    break;
+            };
+        });
+        conn.on('close', function() {
+            status.innerHTML = "Connection reset<br>Awaiting connection...";
+            conn = null;
         });
     };
 
