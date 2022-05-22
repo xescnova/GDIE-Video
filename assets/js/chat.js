@@ -1,10 +1,4 @@
-var peer = new Peer();
-
-peer.on('open', function(id) {
-    console.log('My peer ID is: ' + id);
-});
-
-(function() {
+window.onload = (function() {
 
     var lastPeerId = null;
     var peer = null; // own peer object
@@ -12,10 +6,7 @@ peer.on('open', function(id) {
     var recvIdInput = document.getElementById("receiver-id");
     var status = document.getElementById("status");
     var message = document.getElementById("message");
-    var goButton = document.getElementById("goButton");
-    var resetButton = document.getElementById("resetButton");
-    var fadeButton = document.getElementById("fadeButton");
-    var offButton = document.getElementById("offButton");
+
     var sendMessageBox = document.getElementById("sendMessageBox");
     var sendButton = document.getElementById("sendButton");
     var clearMsgsButton = document.getElementById("clearMsgsButton");
@@ -138,18 +129,7 @@ peer.on('open', function(id) {
         }
     }
 
-    goButton.addEventListener('click', function() {
-        signal("Go");
-    });
-    resetButton.addEventListener('click', function() {
-        signal("Reset");
-    });
-    fadeButton.addEventListener('click', function() {
-        signal("Fade");
-    });
-    offButton.addEventListener('click', function() {
-        signal("Off");
-    });
+
 
     function addMessage(msg) {
         var now = new Date();
