@@ -60,9 +60,16 @@ function desactivarSubtitulos(){
     }
 }
 
+function ocultarSubtitulos(){
+    imgsub = document.getElementById("imgSub")
+    imgsub.src = "assets/img/CC_OFF.png"
+    for (var i = 0; i < video.textTracks.length; i++) {
+        video.textTracks[i].mode = 'hidden';
+    }
+}
 
 $(document).ready( function(){
-    this.desactivarSubtitulos();
+    desactivarSubtitulos();
 });
 
 async function hlsFunction() {
