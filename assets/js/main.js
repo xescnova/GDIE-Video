@@ -54,6 +54,16 @@ video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
 video.addEventListener('play', setDuration);
 
+function desactivarSubtitulos(){
+    for (var i = 0; i < video.textTracks.length; i++) {
+        video.textTracks[i].mode = 'hidden';
+    }
+}
+
+
+$(document).ready( function(){
+    this.desactivarSubtitulos();
+});
 
 async function hlsFunction() {
     var vidPlayer = document.getElementById("videoMrRobot");
@@ -153,6 +163,11 @@ function setDuration() {
     timeVid.max = Math.round(video.duration);
 }
 
+function activarSubtitulos(index){
+    this.desactivarSubtitulos();
+    video.textTracks[index].mode = "showing";
+}
+
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -219,9 +234,10 @@ function botonMuted() {
 function botonSubt() {
     var bS = document.getElementById("botonSubt");
     imgsub = document.getElementById("imgSub")
+    escenas.mode = "showing";
+    imgsub.src = "assets/img/CC_ON.png"
     bS.onclick = function() {
         var esc = escenas.mode;
-        console.log(esc);
         if (esc == "hidden") {
             escenas.mode = "showing";
             imgsub.src = "assets/img/CC_ON.png"
