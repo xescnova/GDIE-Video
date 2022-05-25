@@ -135,6 +135,7 @@ if (videoWorks) {
     volumebar();
     timebar();
     video.muted = false;
+    video.pause();
     //setQuality();
 }
 
