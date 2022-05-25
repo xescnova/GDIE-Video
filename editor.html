@@ -11,8 +11,8 @@
     <!-- JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://www.favicon.cc/logo3d/758735.png" rel="icon">
+    <link href="https://www.favicon.cc/logo3d/758735.png" rel="apple-touch-icon">
     <!-- Google Fonts pedro xD-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -104,10 +104,10 @@
                         <div class="c-video">
                             <video class="video" id="videoMrRobot" onclick="playvid()" playsinline poster="assets/img/MrRobot.png">
                                 <source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/video1.mkv">
-                                <track id="idSubtitulos" kind="subtitles" src="subtENG.vtt" srclang="en" label="">
+                                <track label="English" id="subtENG" kind="subtitles" srclang="en" src="subtENG.vtt">                             
                                 <track id="idMetadados" kind="metadata" src="escenas.vtt" srclang="no"
-                                    label="Metadatos">
-
+                                    label="Metadatos">                              
+                                <track label="Español" id="subtESP" kind="subtitles" srclang="es" src="subtESP.vtt">
                             </video>
 
                             <div class="videoQuality"  onclick="hideQualityOptions()">
@@ -168,7 +168,12 @@
                                             src="assets/img/mas10.png" width="23px"></button>
                                     <button id="botonSubt" type="button"><img id="imgSub"
                                             src="assets/img/CC_OFF.png" width="23px" height="25px"></button>
-
+                                    <div class="dropdown-menu">
+                                        <h4 class="dropdown-header">Subtitulos</h4>
+                                        <div class="dropdown-item" onclick="activarSubtitulos(2)">Español</div>
+                                        <div class="dropdown-item" onclick="activarSubtitulos(0)">Ingles</div>
+                                        <div class="dropdown-item" onclick="ocultarSubtitulos()">Desactivar</div>
+                                    </div>
                                 </div>
                                 <!-- Boton Pantalla Completa -->
                                 <div class="subtitles">
