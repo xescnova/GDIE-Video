@@ -23,8 +23,8 @@ var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
 var act = document.getElementById("imgBoton");
 var tracks = video.textTracks;
-var escenas = tracks[0];
 var personajes = tracks[1];
+var escenas = tracks[0];
 var actorImgId = 0;
 var actorImgCount = [];
 var selectedActor;
@@ -54,6 +54,23 @@ video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
 video.addEventListener('play', setDuration);
 
+function desactivarSubtitulos() {
+    for (var i = 0; i < video.textTracks.length; i++) {
+        video.textTracks[i].mode = 'hidden';
+    }
+}
+
+function ocultarSubtitulos() {
+    imgsub = document.getElementById("imgSub")
+    imgsub.src = "assets/img/CC_OFF.png"
+    for (var i = 0; i < video.textTracks.length; i++) {
+        video.textTracks[i].mode = 'hidden';
+    }
+}
+
+$(document).ready(function() {
+    desactivarSubtitulos();
+});
 
 async function hlsFunction() {
     var vidPlayer = document.getElementById("videoMrRobot");
@@ -153,6 +170,13 @@ function setDuration() {
     timeVid.max = Math.round(video.duration);
 }
 
+function activarSubtitulos(index) {
+    this.desactivarSubtitulos();
+    video.textTracks[index].mode = "showing";
+    imgsub = document.getElementById("imgSub");
+    imgsub.src = "assets/img/CC_ON.png";
+}
+
 function formatTime(timeInSeconds) {
     //const result2 = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     var minutes = Math.floor(timeInSeconds / 60).toString();
@@ -216,21 +240,22 @@ function botonMuted() {
     }
 }
 
-function botonSubt() {
-    var bS = document.getElementById("botonSubt");
-    imgsub = document.getElementById("imgSub")
-    bS.onclick = function() {
-        var esc = escenas.mode;
-        console.log(esc);
-        if (esc == "hidden") {
-            escenas.mode = "showing";
-            imgsub.src = "assets/img/CC_ON.png"
-        } else {
-            escenas.mode = "hidden";
-            imgsub.src = "assets/img/CC_OFF.png"
-        }
-    }
-}
+// function botonSubt() {
+//     var bS = document.getElementById("botonSubt");
+//     imgsub = document.getElementById("imgSub")
+//     escenas.mode = "showing";
+//     imgsub.src = "assets/img/CC_ON.png"
+//     bS.onclick = function() {
+//         var esc = escenas.mode;
+//         if (esc == "hidden") {
+//             escenas.mode = "showing";
+//             imgsub.src = "assets/img/CC_ON.png"
+//         } else {
+//             escenas.mode = "hidden";
+//             imgsub.src = "assets/img/CC_OFF.png"
+//         }
+//     }
+// }
 
 function volumebar() {
     var actualval = volume.value;
@@ -434,7 +459,7 @@ function actorImg() {
 personajes.oncuechange = event => {
     if (document.body.contains(document.getElementById('personajesCaja'))) {
         let cues = personajes.activeCues; // array of current cues
-        console.log(personajes.cues);
+        //console.log(personajes.cues);
         var arrayPersonajes = JSON.parse(cues[0].text);
         var personajesDiv = document.getElementById("personajesCaja");
         personajesDiv.innerHTML = '';
@@ -451,7 +476,7 @@ personajes.oncuechange = event => {
 function listarEscenas() {
     if (document.body.contains(document.getElementById('escenasVideo'))) {
         let cues = personajes.cues;
-        console.log(cues);
+        //console.log(cues);
         for (let i = 0; i < cues.length; i++) {
             var escenasDiv = document.getElementById("escenasVideo");
             var div = document.createElement('div');
@@ -467,7 +492,7 @@ function listarEscenas() {
 function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
-    console.log(idCola);
+    //console.log(idCola);
     $(document).ready(function() {
         $("#" + idCola).remove();
     });
@@ -484,6 +509,11 @@ function cambiarVideo(src) {
     //video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
     filename = src.split('.').slice(0, -1).join('.');
     document.getElementById("idMetadados").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/" + filename + ".vtt");
+    document.getElementById("subtENG").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtENG" + ".vtt");
+    document.getElementById("subtESP").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtESP" + ".vtt");
+    imgsub = document.getElementById("imgSub");
+    imgsub.src = "assets/img/CC_OFF.png";
+    desactivarSubtitulos();
     $("#escenasVideo").empty();
     video.load();
     //listarEscenas();
@@ -599,7 +629,7 @@ function masEscenas() {
         x.id = tituloEscena;
         personajes.addCue(x);
 
-        console.log(personajes.cues);
+        //console.log(personajes.cues);
         $("#escenasVideo").empty();
         listarEscenas();
 
