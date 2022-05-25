@@ -2,7 +2,7 @@
 $requestPayload = file_get_contents("php://input");
 $object= json_decode($requestPayload,true);
 
-//var_dump($object);
+var_dump($object);
 
 
 //FALTA PONER QUE LA RUTA SEA /videos para que las escenas la lea bien

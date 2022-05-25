@@ -121,7 +121,7 @@ window.onload = (function() {
                 if(data.toLowerCase() == actorActual.Nombre.toLowerCase())
                 {
                     document.getElementById('youWin').innerHTML = "YOU LOST!";
-                    document.getElementById('correct').src = "/assets/img/lost.gif";
+                    document.getElementById('correct').src = "assets/img/lost.gif";
                 }   
             }
         });
@@ -164,7 +164,7 @@ window.onload = (function() {
                         if(data.toLowerCase() == actorActual.Nombre.toLowerCase())
                         {
                             document.getElementById('youWin').innerHTML = "YOU LOST!";
-                            document.getElementById('correct').src = "/assets/img/lost.gif";
+                            document.getElementById('correct').src = "assets/img/lost.gif";
                         }   
                     }
                     break;
@@ -282,9 +282,9 @@ window.onload = (function() {
                 {
                     addMessage("<span class=\"peerMsg\">Peer:</span> " + msg);
                     document.getElementById('youWin').innerHTML = "YOU WIN!";
-                    document.getElementById('fire1').src = "/assets/img/firework.gif";
-                    document.getElementById('correct').src = "/assets/img/correct.gif";
-                    document.getElementById('fire2').src = "/assets/img/firework.gif";
+                    document.getElementById('fire1').src = "assets/img/firework.gif";
+                    document.getElementById('correct').src = "assets/img/correct.gif";
+                    document.getElementById('fire2').src = "assets/img/firework.gif";
                 }
                 else
                 {
