@@ -211,7 +211,7 @@ window.onload = (function() {
             sendMessageBox.value = "";
             conn.send(msg);
             console.log("Sent: " + msg);
-            addMessage("<span class=\"selfMsg\">Self: </span> " + msg);
+            addMessage("<span class=\"selfMsg\">Yo: </span> " + msg);
         } else {
             console.log('Connection is closed');
         }
