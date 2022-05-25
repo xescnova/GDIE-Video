@@ -23,8 +23,8 @@ var botonpl = document.getElementById("botonPlay");
 var imgplay = document.getElementById("imgBoton");
 var act = document.getElementById("imgBoton");
 var tracks = video.textTracks;
-var escenas = tracks[0];
 var personajes = tracks[1];
+var escenas = tracks[0];
 var actorImgId = 0;
 var actorImgCount = [];
 var selectedActor;
@@ -54,13 +54,13 @@ video.addEventListener('timeupdate', timebar);
 timeVid.addEventListener('input', moveBar);
 video.addEventListener('play', setDuration);
 
-function desactivarSubtitulos(){
+function desactivarSubtitulos() {
     for (var i = 0; i < video.textTracks.length; i++) {
         video.textTracks[i].mode = 'hidden';
     }
 }
 
-function ocultarSubtitulos(){
+function ocultarSubtitulos() {
     imgsub = document.getElementById("imgSub")
     imgsub.src = "assets/img/CC_OFF.png"
     for (var i = 0; i < video.textTracks.length; i++) {
@@ -68,7 +68,7 @@ function ocultarSubtitulos(){
     }
 }
 
-$(document).ready( function(){
+$(document).ready(function() {
     desactivarSubtitulos();
 });
 
@@ -170,7 +170,7 @@ function setDuration() {
     timeVid.max = Math.round(video.duration);
 }
 
-function activarSubtitulos(index){
+function activarSubtitulos(index) {
     this.desactivarSubtitulos();
     video.textTracks[index].mode = "showing";
 }
@@ -457,7 +457,7 @@ function actorImg() {
 personajes.oncuechange = event => {
     if (document.body.contains(document.getElementById('personajesCaja'))) {
         let cues = personajes.activeCues; // array of current cues
-        console.log(personajes.cues);
+        //console.log(personajes.cues);
         var arrayPersonajes = JSON.parse(cues[0].text);
         var personajesDiv = document.getElementById("personajesCaja");
         personajesDiv.innerHTML = '';
@@ -474,7 +474,7 @@ personajes.oncuechange = event => {
 function listarEscenas() {
     if (document.body.contains(document.getElementById('escenasVideo'))) {
         let cues = personajes.cues;
-        console.log(cues);
+        //console.log(cues);
         for (let i = 0; i < cues.length; i++) {
             var escenasDiv = document.getElementById("escenasVideo");
             var div = document.createElement('div');
@@ -490,7 +490,7 @@ function listarEscenas() {
 function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
-    console.log(idCola);
+    //console.log(idCola);
     $(document).ready(function() {
         $("#" + idCola).remove();
     });
@@ -625,7 +625,7 @@ function masEscenas() {
         x.id = tituloEscena;
         personajes.addCue(x);
 
-        console.log(personajes.cues);
+        //console.log(personajes.cues);
         $("#escenasVideo").empty();
         listarEscenas();
 

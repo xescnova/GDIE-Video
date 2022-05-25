@@ -10,8 +10,8 @@
 
     <!-- Bootstrap Lib-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -117,11 +117,11 @@
                 <div class="row gy-4">
                     <div class="col-lg-8">
                         <div class="c-video">
-                            <video data-dashjs-player src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd" class="video" id="videoMrRobot" onclick="playvid()" playsinline poster="assets/img/MrRobot.png">
-                                <!--<source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd">-->
+                            <video data-dashjs-player src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd" muted autoplay class="video" id="videoMrRobot" onclick="playvid()" playsinline poster="assets/img/MrRobot.png">
+                                <!--<source id="idVideo" src="https://alumnes-ltim.uib.es/gdie2206/video/adaptative/output.mpd">-->   
+                                <track label="English" id="subtENG" kind="subtitles" srclang="en" src="subtENG.vtt">                             
                                 <track id="idMetadados" kind="metadata" src="escenas.vtt" srclang="no"
-                                    label="Metadatos">
-                                <track label="English" id="subtENG" kind="subtitles" srclang="en" src="subtENG.vtt">
+                                    label="Metadatos">                              
                                 <track label="Español" id="subtESP" kind="subtitles" srclang="es" src="subtESP.vtt">
                             </video>
                             <!--https://alumnes-ltim.uib.es/gdie2206/video/video1subtESP.vtt-->
@@ -171,10 +171,11 @@
                                             src="assets/img/menos10.png" width="23px"></button>
                                     <button id="plusten" onclick="plusTen()" type="button"><img id="imgPlusten"
                                             src="assets/img/mas10.png" width="23px"></button>
-                                    
-                                            <div class="btn-group dropup">
-                                                <button id="botonSubt" data-toggle="dropdown" onclick="botonSubt()" type="button"><img id="imgSub"
+
+                                    <div class="btn-group dropup">
+                                        <button id="botonSubt" data-toggle="dropdown" onclick="botonSubt()" type="button"><img id="imgSub"
                                                      src="assets/img/CC_OFF.png" width="23px" height="25px"></button>
+<<<<<<< HEAD
                                                 <div class="dropdown-menu">
                                                       <h4 class="dropdown-header">Subtitulos</h4>
                                                     <div class="dropdown-item" onclick="activarSubtitulos(2)">Español</div>
@@ -186,6 +187,16 @@
                                                     <div class="dropdown-item" onclick="cambiarAudio()">Ingles</div> -->
                                                 </div>
                                               </div>
+=======
+                                        <div class="dropdown-menu">
+                                            <h4 class="dropdown-header">Subtitulos</h4>
+                                            <div class="dropdown-item" onclick="activarSubtitulos(2)">Español</div>
+                                            <div class="dropdown-item" onclick="activarSubtitulos(1)">Ingles</div>
+                                            <div class="dropdown-item" onclick="ocultarSubtitulos()">Desactivar</div>
+
+                                        </div>
+                                    </div>
+>>>>>>> 24af363f7e33e76a5110adfe02952362708118ef
                                 </div>
                                 <!-- Boton Pantalla Completa -->
                                 <div class="subtitles">
