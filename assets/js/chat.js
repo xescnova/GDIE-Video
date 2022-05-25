@@ -1,3 +1,11 @@
+var JsonActors;
+var imagenActual;
+var actorActual;
+var mainPackage;
+function pathSplitter(str) {
+    return str.split('\\').pop().split('/').pop();
+}
+
 window.onload = (function() {
 
     var lastPeerId = null;
@@ -6,7 +14,7 @@ window.onload = (function() {
     var recvIdInput = document.getElementById("receiver-id");
     var status = document.getElementById("status");
     var message = document.getElementById("message");
-
+    
     var sendMessageBox = document.getElementById("sendMessageBox");
     var sendButton = document.getElementById("sendButton");
     var clearMsgsButton = document.getElementById("clearMsgsButton");
@@ -36,7 +44,7 @@ window.onload = (function() {
 
             console.log('ID: ' + peer.id);
             var idCon = document.getElementById("connID");
-            idCon.innerHTML = 'ID: ' + peer.id;
+            idCon.innerHTML = '<strong style="color:rgb(106, 4, 229);">Your ID:</strong> ' + peer.id;
         });
         peer.on('connection', function(c) {
             // Allow only a single connection	
@@ -47,6 +55,10 @@ window.onload = (function() {
                 });
                 return;
             }
+            // Check URL params for comamnds that should be sent immediately
+            var command = getUrlParam("command");
+            if (command)
+            conn.send(command);
             conn = c;
             console.log("Connected to: " + conn.peer);
             status.innerHTML = "Connected";
@@ -92,24 +104,41 @@ window.onload = (function() {
         conn.on('open', function() {
             status.innerHTML = "Connected to: " + conn.peer;
             console.log("Connected to: " + conn.peer);
-
+            conn.send(actorActual);
             // Check URL params for comamnds that should be sent immediately
             var command = getUrlParam("command");
             if (command)
                 conn.send(command);
         });
+        
         // Handle incoming data (messages only since this is the signal sender)
         conn.on('data', function(data) {
-            addMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+            //debugger;
+            console.log("received: "+data)
+            if (typeof data != 'object')
+            {
+                addMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                if(data.toLowerCase() == actorActual.Nombre.toLowerCase())
+                {
+                    document.getElementById('youWin').innerHTML = "YOU LOST!";
+                    document.getElementById('correct').src = "/assets/img/lost.gif";
+                }   
+            }
         });
         conn.on('close', function() {
             status.innerHTML = "Connection closed";
         });
     };
 
-    function ready() {
+    async function ready() {
         conn.on('data', function(data) {
             console.log("Data recieved");
+            console.log("received: "+data)
+            if (typeof data == 'object')
+            {
+                setImg(data);
+            }
+            
             var cueString = "<span class=\"cueMsg\">Cue: </span>";
             switch (data) {
                 case 'Go':
@@ -129,7 +158,15 @@ window.onload = (function() {
                     addMessage(cueString + data);
                     break;
                 default:
-                    addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
+                    if (typeof data != 'object')
+                    {
+                        addMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+                        if(data.toLowerCase() == actorActual.Nombre.toLowerCase())
+                        {
+                            document.getElementById('youWin').innerHTML = "YOU LOST!";
+                            document.getElementById('correct').src = "/assets/img/lost.gif";
+                        }   
+                    }
                     break;
             };
         });
@@ -192,6 +229,33 @@ window.onload = (function() {
         message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
     };
 
+    
+
+    async function getJsonData()
+    {
+        responseActors = await fetch('assets/json/actores.json');
+        JsonActors = await responseActors.json();
+        changeImg();
+    }
+
+    function changeImg()
+    {
+        var img = document.getElementById("actImg");
+        actorActual = JsonActors[Math.floor(Math.random() * JsonActors.length)];
+        imagenActual = "assets/img/"+pathSplitter(actorActual.Imagen);
+        img.src = imagenActual;
+    }
+
+    function setImg(data)
+    {
+        actorActual = data;
+        var imgData = actorActual.Imagen;
+        var img = document.getElementById("actImg");
+        imagenActual = "assets/img/"+pathSplitter(imgData);
+        //debugger;
+        img.src = imagenActual;
+    }
+
     function clearMessages() {
         message.innerHTML = "";
         addMessage("Msgs cleared");
@@ -211,7 +275,23 @@ window.onload = (function() {
             sendMessageBox.value = "";
             conn.send(msg);
             console.log("Sent: " + msg);
-            addMessage("<span class=\"selfMsg\">Self: </span> " + msg);
+            
+            if (typeof msg != 'object')
+            {
+                if(msg.toLowerCase() == actorActual.Nombre.toLowerCase())
+                {
+                    addMessage("<span class=\"peerMsg\">Peer:</span> " + msg);
+                    document.getElementById('youWin').innerHTML = "YOU WIN!";
+                    document.getElementById('fire1').src = "/assets/img/firework.gif";
+                    document.getElementById('correct').src = "/assets/img/correct.gif";
+                    document.getElementById('fire2').src = "/assets/img/firework.gif";
+                }
+                else
+                {
+                    addMessage("<span class=\"peerMsg\">Peer:</span> " + msg);
+                }   
+            }
+            
         } else {
             console.log('Connection is closed');
         }
@@ -224,4 +304,5 @@ window.onload = (function() {
 
     // Since all our callbacks are setup, start the process of obtaining an ID
     initialize();
+    getJsonData();
 })();
