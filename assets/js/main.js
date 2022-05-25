@@ -457,7 +457,7 @@ function actorImg() {
 personajes.oncuechange = event => {
     if (document.body.contains(document.getElementById('personajesCaja'))) {
         let cues = personajes.activeCues; // array of current cues
-        console.log(personajes.cues);
+        //console.log(personajes.cues);
         var arrayPersonajes = JSON.parse(cues[0].text);
         var personajesDiv = document.getElementById("personajesCaja");
         personajesDiv.innerHTML = '';
