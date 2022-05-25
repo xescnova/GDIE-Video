@@ -68,7 +68,7 @@ function ocultarSubtitulos() {
     }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     desactivarSubtitulos();
 });
 
@@ -79,18 +79,18 @@ async function hlsFunction() {
         console.log("HLS");
         hls.loadSource("https://alumnes-ltim.uib.es/gdie2206/video/manifest.m3u8");
         hls.attachMedia(vidPlayer);
-        hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
             const availableQualities = hls.levels.map((l) => l.height);
             availableQualities.unshift(0);
 
             // Añadir calidades a las opciones
             defaultOptions.quality = {
-                    default: 0,
-                    options: availableQualities,
-                    forced: true,
-                    onChange: (e) => qualityUpdate(e),
-                }
-                // Añadir opciones de calidad al player
+                default: 0,
+                options: availableQualities,
+                forced: true,
+                onChange: (e) => qualityUpdate(e),
+            }
+            // Añadir opciones de calidad al player
             var code = "";
             var qualAct;
             for (i = 1; i < defaultOptions.quality.options.length; i++) {
@@ -215,7 +215,7 @@ function updateTimeElapsed() {
 //Play y pause del vídeo
 function botonPlay() {
 
-    botonpl.onclick = function() {
+    botonpl.onclick = function () {
         if (video.paused) {
             video.play();
             imgplay.src = "assets/img/pause.png"
@@ -229,7 +229,7 @@ function botonPlay() {
 //Mute y unmute del vídeo
 function botonMuted() {
     var botonmt = document.getElementById("botonMute");
-    botonmt.onclick = function() {
+    botonmt.onclick = function () {
         if (video.muted) {
             video.muted = false;
             imgmute.src = "assets/img/soundon.png";
@@ -429,7 +429,7 @@ function removeActor() { //
     }
 
 }
-$.getJSON('assets/json/actores.json', function(data) {
+$.getJSON('assets/json/actores.json', function (data) {
     if (select) {
         arr = data;
         for (var i = 0; i < arr.length; i++) {
@@ -494,7 +494,7 @@ function eliminarCola(id, idColaActual) {
     const idCola = "nombresP" + id;
     document.getElementById(idCola);
     //console.log(idCola);
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#" + idCola).remove();
     });
     for (let i = 0; i < personajes.cues.length; i++) {
@@ -506,18 +506,24 @@ function eliminarCola(id, idColaActual) {
 
 //Cambia de video con setAttribute
 function cambiarVideo(src) {
-    video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
-    //video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
-    filename = src.split('.').slice(0, -1).join('.');
-    document.getElementById("idMetadados").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/" + filename + ".vtt");
-    document.getElementById("subtENG").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtENG" + ".vtt");
-    document.getElementById("subtESP").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtESP" + ".vtt");
+    if (src.includes(".m3u8")) {
+        hlsFunction();
+        document.getElementById("idMetadados").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video1.vtt");
+        document.getElementById("subtENG").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/video1subtENG.vtt");
+        document.getElementById("subtESP").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/video1subtESP.vtt");
+    } else {
+        video.setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + src);
+        //video.setAttribute("poster", "assets/img/" + src.split('.').slice(0, -1).join('.') + ".png");
+        filename = src.split('.').slice(0, -1).join('.');
+        document.getElementById("idMetadados").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/" + filename + ".vtt");
+        document.getElementById("subtENG").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtENG" + ".vtt");
+        document.getElementById("subtESP").setAttribute("src", "https://alumnes-ltim.uib.es/gdie2206/video/" + filename + "subtESP" + ".vtt");
+    }
     imgsub = document.getElementById("imgSub");
     imgsub.src = "assets/img/CC_OFF.png";
     desactivarSubtitulos();
     $("#escenasVideo").empty();
     video.load();
-    //listarEscenas();
 }
 
 /*
@@ -533,7 +539,7 @@ function crearDropdown() {
     $.ajax({
         url: "listarVideos.php",
         type: "POST",
-        success: function(result) {
+        success: function (result) {
             var videos = JSON.parse(result);
             for (let index = 0; index < videos.length; index++) {
                 var listaVideos = document.getElementById("dropdown-videos");
@@ -552,7 +558,7 @@ function infoActor(idIMDB) {
         "timeout": 0,
     };
 
-    $.ajax(settings).done(function(response) {
+    $.ajax(settings).done(function (response) {
         //console.log(response);
         var infoP = document.getElementById("infoPersonaje");
         infoP.innerHTML = ' ';
@@ -579,7 +585,7 @@ function ajaxCall() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "guardarEscenas.php");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function() {
+    xhr.onload = function () {
         //console.log(this.response);
     }
     xhr.send(json);
