@@ -275,7 +275,6 @@ window.onload = (function() {
             sendMessageBox.value = "";
             conn.send(msg);
             console.log("Sent: " + msg);
-<<<<<<< HEAD
             
             if (typeof msg != 'object')
             {
@@ -293,9 +292,6 @@ window.onload = (function() {
                 }   
             }
             
-=======
-            addMessage("<span class=\"selfMsg\">Yo: </span> " + msg);
->>>>>>> fb45143c52b54e4acabf25ecccf7d14eea0400f2
         } else {
             console.log('Connection is closed');
         }
